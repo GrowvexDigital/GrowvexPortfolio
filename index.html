@@ -166,7 +166,6 @@
   /* ---------- logo row (auto-scroll marquee) ---------- */
   .logo-marquee{overflow:hidden; margin-top:1.2rem; -webkit-mask-image:linear-gradient(90deg, transparent, black 4%, black 96%, transparent); mask-image:linear-gradient(90deg, transparent, black 4%, black 96%, transparent);}
   .logo-track{display:flex; gap:2.2rem; width:max-content; animation:logoScroll 26s linear infinite;}
-  .logo-marquee:hover .logo-track{animation-play-state:paused;}
   @media (prefers-reduced-motion: reduce){ .logo-track{animation:none;} }
   @keyframes logoScroll{from{transform:translateX(0);} to{transform:translateX(-50%);}}
   .logo-cell{flex:0 0 210px; display:flex; align-items:center; justify-content:center; min-height:130px;}
@@ -181,7 +180,6 @@
   .founder-head{display:grid; grid-template-columns:1fr 1fr; gap:clamp(2rem,5vw,4rem); align-items:end; margin-bottom:clamp(2.2rem,5vw,3rem);}
   .founder-marquee{overflow:hidden; -webkit-mask-image:linear-gradient(90deg, transparent, black 4%, black 96%, transparent); mask-image:linear-gradient(90deg, transparent, black 4%, black 96%, transparent);}
   .founder-grid{display:flex; gap:1rem; width:max-content; animation:founderScroll 26s linear infinite;}
-  .founder-marquee:hover .founder-grid{animation-play-state:paused;}
   @media (prefers-reduced-motion: reduce){ .founder-grid{animation:none;} }
   @keyframes founderScroll{from{transform:translateX(0);} to{transform:translateX(-50%);}}
   .founder-card{flex:0 0 auto; width:200px; border-radius:14px; border:1px solid var(--line-strong); background:var(--bg-raised-2); padding:1.4rem; min-height:110px; display:flex; align-items:center; justify-content:center; transition:transform .3s ease, border-color .3s ease;}
@@ -700,6 +698,36 @@
     }, {threshold:.1, rootMargin:'0px 0px -60px 0px'});
     els.forEach(function(el){ io.observe(el); });
   } else { els.forEach(function(el){ el.classList.add('in'); }); }
+
+  // marquee pause: mouse hover pauses/resumes immediately (like the old
+  // CSS :hover rule), but touch can't fire a reliable "leave" event, so a
+  // tap only pauses briefly for feedback and always auto-resumes on a timer.
+  (function(){
+    var TOUCH_RESUME_DELAY = 900;
+    document.querySelectorAll('.logo-marquee, .founder-marquee').forEach(function(marquee){
+      var track = marquee.querySelector('.logo-track, .founder-grid');
+      if(!track) return;
+      var resumeTimer = null;
+
+      function pause(){ track.style.animationPlayState = 'paused'; }
+      function resume(){
+        if(resumeTimer){ clearTimeout(resumeTimer); resumeTimer = null; }
+        track.style.animationPlayState = '';
+      }
+
+      marquee.addEventListener('pointerenter', function(e){
+        if(e.pointerType === 'mouse'){ resume(); pause(); }
+      });
+      marquee.addEventListener('pointerleave', function(e){
+        if(e.pointerType === 'mouse'){ resume(); }
+      });
+      marquee.addEventListener('touchstart', function(){
+        pause();
+        if(resumeTimer){ clearTimeout(resumeTimer); }
+        resumeTimer = setTimeout(resume, TOUCH_RESUME_DELAY);
+      }, {passive:true});
+    });
+  })();
 
   (function(){
     var root = document.documentElement;
