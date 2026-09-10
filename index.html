@@ -467,10 +467,10 @@
   <div class="portal-wrap reveal">
     <div class="portal-rings"></div>
     <div class="portal-circle" id="portalCircle">
-      <img src="assets/d2c/d2c-static-2.jpeg" alt="" loading="lazy" />
+      <video class="portal-video" autoplay muted loop playsinline preload="auto" poster="assets/d2c/d2c-reel-5-poster.jpg"><source src="assets/d2c/d2c-reel-5.mp4" type="video/mp4" /></video>
       <video class="portal-video" autoplay muted loop playsinline preload="auto" poster="assets/food-beverage/fb-reel-4-poster.jpg"><source src="assets/food-beverage/fb-reel-4.mp4" type="video/mp4" /></video>
       <video class="portal-video" autoplay muted loop playsinline preload="auto" poster="assets/academic/academic-reel-2-poster.jpg"><source src="assets/academic/academic-reel-2.mp4" type="video/mp4" /></video>
-      <img src="assets/d2c/d2c-static-5.jpeg" alt="" loading="lazy" />
+      <video class="portal-video" autoplay muted loop playsinline preload="auto" poster="assets/d2c/d2c-reel-8-poster.jpg"><source src="assets/d2c/d2c-reel-8.mp4" type="video/mp4" /></video>
     </div>
     <span class="portal-tag">Real client work</span>
   </div>
@@ -861,21 +861,19 @@
     els.forEach(function(el){ io.observe(el); });
   } else { els.forEach(function(el){ el.classList.add('in'); }); }
 
-  // marquee pause: mouse hover pauses/resumes immediately (like the old
-  // CSS :hover rule), but touch can't fire a reliable "leave" event, so a
-  // tap only pauses briefly for feedback and always auto-resumes on a timer.
+  // marquee pause: mouse hover pauses/resumes immediately. Touch is
+  // intentionally NOT wired to pause/resume here -- a page-scroll swipe
+  // that merely passes over the marquee also fires touchstart, and
+  // repeated touchstarts (normal during scrolling) kept resetting a
+  // resume timer, leaving the marquee stuck paused indefinitely on
+  // mobile. Touch users just get an uninterrupted auto-scroll.
   (function(){
-    var TOUCH_RESUME_DELAY = 900;
     document.querySelectorAll('.logo-marquee, .founder-marquee').forEach(function(marquee){
       var track = marquee.querySelector('.logo-track, .founder-grid');
       if(!track) return;
-      var resumeTimer = null;
 
       function pause(){ track.style.animationPlayState = 'paused'; }
-      function resume(){
-        if(resumeTimer){ clearTimeout(resumeTimer); resumeTimer = null; }
-        track.style.animationPlayState = '';
-      }
+      function resume(){ track.style.animationPlayState = ''; }
 
       marquee.addEventListener('pointerenter', function(e){
         if(e.pointerType === 'mouse'){ resume(); pause(); }
@@ -883,11 +881,6 @@
       marquee.addEventListener('pointerleave', function(e){
         if(e.pointerType === 'mouse'){ resume(); }
       });
-      marquee.addEventListener('touchstart', function(){
-        pause();
-        if(resumeTimer){ clearTimeout(resumeTimer); }
-        resumeTimer = setTimeout(resume, TOUCH_RESUME_DELAY);
-      }, {passive:true});
     });
   })();
 
