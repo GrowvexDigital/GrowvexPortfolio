@@ -187,6 +187,30 @@
   .gallery-label{font-family:"IBM Plex Mono"; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); margin:0 0 1rem;}
   .gallery-label.spaced{margin-top:2.8rem;}
 
+  /* ---------- brand logos auto-scroll (filtered by category) ---------- */
+  .logo-marquee{overflow:hidden; margin-top:1.2rem; -webkit-mask-image:linear-gradient(90deg, transparent, black 4%, black 96%, transparent); mask-image:linear-gradient(90deg, transparent, black 4%, black 96%, transparent);}
+  .logo-track{display:flex; gap:2.2rem; width:max-content; animation:logoScroll 26s linear infinite;}
+  @media (prefers-reduced-motion: reduce){ .logo-track{animation:none;} }
+  @keyframes logoScroll{from{transform:translateX(0);} to{transform:translateX(-50%);}}
+  .logo-cell{flex:0 0 190px; display:flex; align-items:center; justify-content:center; min-height:120px;}
+  .logo-cell img{max-height:96px; max-width:100%; width:auto; object-fit:contain; transition:transform .25s ease;}
+  .logo-cell:hover img{transform:scale(1.05);}
+  @media (max-width:560px){ .logo-cell{flex-basis:150px;} .logo-cell img{max-height:76px;} }
+
+  /* ---------- statics wavy auto-scroll carousel (filtered by category) ---------- */
+  .statics-carousel{overflow:hidden; margin-top:2.8rem; padding:2.6rem 0; -webkit-mask-image:linear-gradient(90deg, transparent, black 5%, black 95%, transparent); mask-image:linear-gradient(90deg, transparent, black 5%, black 95%, transparent);}
+  .statics-track{display:flex; align-items:center; gap:1.4rem; width:max-content; animation:staticsScroll 30s linear infinite;}
+  @media (prefers-reduced-motion: reduce){ .statics-track{animation:none;} }
+  @keyframes staticsScroll{from{transform:translateX(0);} to{transform:translateX(-50%);}}
+  .polaroid-card{flex:0 0 auto; width:clamp(120px,15vw,180px); aspect-ratio:1/1.08; background:#fff; padding:7px 7px 9px; border-radius:14px; box-shadow:0 16px 34px -14px rgba(0,0,0,.3);}
+  .polaroid-card img{width:100%; height:100%; object-fit:cover; border-radius:8px; display:block;}
+  .polaroid-card:nth-child(6n+1){transform:translateY(-16px) rotate(-7deg);}
+  .polaroid-card:nth-child(6n+2){transform:translateY(10px) rotate(5deg);}
+  .polaroid-card:nth-child(6n+3){transform:translateY(-6px) rotate(-10deg);}
+  .polaroid-card:nth-child(6n+4){transform:translateY(14px) rotate(8deg);}
+  .polaroid-card:nth-child(6n+5){transform:translateY(-12px) rotate(-4deg);}
+  .polaroid-card:nth-child(6n+6){transform:translateY(6px) rotate(11deg);}
+
   .scroll-row{display:flex; gap:1rem; overflow-x:auto; scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch; padding-bottom:.6rem;}
   .scroll-row::-webkit-scrollbar{height:6px;}
   .scroll-row::-webkit-scrollbar-track{background:transparent;}
@@ -510,7 +534,41 @@
         <a class="cat-btn" data-cat="food-beverage" href="#cat-food-beverage">Salons</a>
       </div>
 
-      <p class="gallery-label">High Impact Reels</p>
+      <p class="gallery-label">Brand Logos</p>
+      <div class="logo-marquee reveal" id="logoMarquee">
+        <div class="logo-track" data-cat="d2c">
+          <div class="logo-cell"><img src="assets/brands/dchica.png" alt="dChica" /></div>
+          <div class="logo-cell"><img src="assets/brands/seams-beyond.png" alt="Seams Beyond" /></div>
+          <div class="logo-cell"><img src="assets/brands/winsome.png" alt="Winsome" /></div>
+          <div class="logo-cell"><img src="assets/brands/elly.png" alt="Elly" /></div>
+          <div class="logo-cell"><img src="assets/brands/rootin.png" alt="Rootin Official" /></div>
+          <div class="logo-cell"><img src="assets/brands/poiesis_logo.png" alt="Poiesis" /></div>
+          <div class="logo-cell"><img src="assets/brands/street-jutsu-logo.jpeg" alt="Street Jutsu" /></div>
+          <div class="logo-cell" aria-hidden="true"><img src="assets/brands/dchica.png" alt="" /></div>
+          <div class="logo-cell" aria-hidden="true"><img src="assets/brands/seams-beyond.png" alt="" /></div>
+          <div class="logo-cell" aria-hidden="true"><img src="assets/brands/winsome.png" alt="" /></div>
+          <div class="logo-cell" aria-hidden="true"><img src="assets/brands/elly.png" alt="" /></div>
+          <div class="logo-cell" aria-hidden="true"><img src="assets/brands/rootin.png" alt="" /></div>
+          <div class="logo-cell" aria-hidden="true"><img src="assets/brands/poiesis_logo.png" alt="" /></div>
+          <div class="logo-cell" aria-hidden="true"><img src="assets/brands/street-jutsu-logo.jpeg" alt="" /></div>
+        </div>
+        <div class="logo-track" data-cat="academic" style="display:none;">
+          <div class="logo-cell"><img src="assets/brands/researchcraft.png" alt="ResearchCraft" /></div>
+          <div class="logo-cell"><img src="assets/brands/thesiszen.png" alt="ThesisZen" /></div>
+          <div class="logo-cell"><img src="assets/brands/myschool-logo.jpeg" alt="MY School" /></div>
+          <div class="logo-cell" aria-hidden="true"><img src="assets/brands/researchcraft.png" alt="" /></div>
+          <div class="logo-cell" aria-hidden="true"><img src="assets/brands/thesiszen.png" alt="" /></div>
+          <div class="logo-cell" aria-hidden="true"><img src="assets/brands/myschool-logo.jpeg" alt="" /></div>
+        </div>
+        <div class="logo-track" data-cat="food-beverage" style="display:none;">
+          <div class="logo-cell"><img src="assets/brands/kake-di-hatti.png" alt="Kake Di Hatti" /></div>
+          <div class="logo-cell"><img src="assets/brands/mitraa.png" alt="Mitraa Café Couture" /></div>
+          <div class="logo-cell" aria-hidden="true"><img src="assets/brands/kake-di-hatti.png" alt="" /></div>
+          <div class="logo-cell" aria-hidden="true"><img src="assets/brands/mitraa.png" alt="" /></div>
+        </div>
+      </div>
+
+      <p class="gallery-label spaced">High Impact Reels</p>
       <div class="scroll-row reels reveal" id="galleryReels">
         <div class="media-card" data-category="d2c"><span class="badge">Reel</span><video muted loop playsinline><source src="assets/d2c/d2c-reel-5.mp4" type="video/mp4" /></video></div>
         <div class="media-card" data-category="d2c"><span class="badge">Reel</span><video muted loop playsinline><source src="assets/d2c/d2c-reel-1.mp4" type="video/mp4" /></video></div>
@@ -526,17 +584,57 @@
       </div>
 
       <p class="gallery-label spaced">Statics That People Stop &amp; See</p>
-      <div class="scroll-row squares reveal" id="galleryStatics">
-        <div class="media-card" data-category="d2c"><img src="assets/d2c/d2c-static-1.jpeg" alt="" loading="lazy" /></div>
-        <div class="media-card" data-category="d2c"><img src="assets/d2c/d2c-static-4.jpeg" alt="" loading="lazy" /></div>
-        <div class="media-card" data-category="d2c"><img src="assets/d2c/d2c-static-7.jpeg" alt="" loading="lazy" /></div>
-        <div class="media-card" data-category="d2c"><img src="assets/d2c/d2c-static-5.jpeg" alt="" loading="lazy" /></div>
-        <div class="media-card" data-category="academic"><img src="assets/academic/academic-static-1.jpeg" alt="" loading="lazy" /></div>
-        <div class="media-card" data-category="academic"><img src="assets/academic/academic-static-4.jpeg" alt="" loading="lazy" /></div>
-        <div class="media-card" data-category="academic"><img src="assets/academic/academic-static-6.jpeg" alt="" loading="lazy" /></div>
-        <div class="media-card" data-category="food-beverage"><img src="assets/food-beverage/fb-static-1.jpeg" alt="" loading="lazy" /></div>
-        <div class="media-card" data-category="food-beverage"><img src="assets/food-beverage/fb-static-4.jpeg" alt="" loading="lazy" /></div>
-        <div class="media-card" data-category="food-beverage"><img src="assets/food-beverage/fb-static-6.jpeg" alt="" loading="lazy" /></div>
+      <div class="statics-carousel reveal" id="staticsCarousel">
+        <div class="statics-track" data-cat="d2c">
+          <div class="polaroid-card"><img src="assets/d2c/d2c-static-1.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card"><img src="assets/d2c/d2c-static-2.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card"><img src="assets/d2c/d2c-static-3.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card"><img src="assets/d2c/d2c-static-4.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card"><img src="assets/d2c/d2c-static-5.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card"><img src="assets/d2c/d2c-static-6.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card"><img src="assets/d2c/d2c-static-7.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card"><img src="assets/d2c/d2c-static-8.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card" aria-hidden="true"><img src="assets/d2c/d2c-static-1.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card" aria-hidden="true"><img src="assets/d2c/d2c-static-2.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card" aria-hidden="true"><img src="assets/d2c/d2c-static-3.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card" aria-hidden="true"><img src="assets/d2c/d2c-static-4.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card" aria-hidden="true"><img src="assets/d2c/d2c-static-5.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card" aria-hidden="true"><img src="assets/d2c/d2c-static-6.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card" aria-hidden="true"><img src="assets/d2c/d2c-static-7.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card" aria-hidden="true"><img src="assets/d2c/d2c-static-8.jpeg" alt="" loading="lazy" /></div>
+        </div>
+        <div class="statics-track" data-cat="academic" style="display:none;">
+          <div class="polaroid-card"><img src="assets/academic/academic-static-1.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card"><img src="assets/academic/academic-static-2.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card"><img src="assets/academic/academic-static-3.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card"><img src="assets/academic/academic-static-4.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card"><img src="assets/academic/academic-static-5.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card"><img src="assets/academic/academic-static-6.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card"><img src="assets/academic/academic-static-7.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card"><img src="assets/academic/academic-static-8.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card" aria-hidden="true"><img src="assets/academic/academic-static-1.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card" aria-hidden="true"><img src="assets/academic/academic-static-2.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card" aria-hidden="true"><img src="assets/academic/academic-static-3.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card" aria-hidden="true"><img src="assets/academic/academic-static-4.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card" aria-hidden="true"><img src="assets/academic/academic-static-5.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card" aria-hidden="true"><img src="assets/academic/academic-static-6.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card" aria-hidden="true"><img src="assets/academic/academic-static-7.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card" aria-hidden="true"><img src="assets/academic/academic-static-8.jpeg" alt="" loading="lazy" /></div>
+        </div>
+        <div class="statics-track" data-cat="food-beverage" style="display:none;">
+          <div class="polaroid-card"><img src="assets/food-beverage/fb-static-1.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card"><img src="assets/food-beverage/fb-static-2.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card"><img src="assets/food-beverage/fb-static-3.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card"><img src="assets/food-beverage/fb-static-4.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card"><img src="assets/food-beverage/fb-static-5.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card"><img src="assets/food-beverage/fb-static-6.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card" aria-hidden="true"><img src="assets/food-beverage/fb-static-1.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card" aria-hidden="true"><img src="assets/food-beverage/fb-static-2.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card" aria-hidden="true"><img src="assets/food-beverage/fb-static-3.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card" aria-hidden="true"><img src="assets/food-beverage/fb-static-4.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card" aria-hidden="true"><img src="assets/food-beverage/fb-static-5.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card" aria-hidden="true"><img src="assets/food-beverage/fb-static-6.jpeg" alt="" loading="lazy" /></div>
+        </div>
       </div>
 
       <p class="gallery-label spaced">Satisfying Instagram Grids</p>
@@ -826,6 +924,20 @@
       marquee.addEventListener('pointerenter', function(e){ if(e.pointerType === 'mouse'){ resume(); pause(); } });
       marquee.addEventListener('pointerleave', function(e){ if(e.pointerType === 'mouse'){ resume(); } });
     });
+    document.querySelectorAll('#logoMarquee').forEach(function(marquee){
+      var tracks = marquee.querySelectorAll('.logo-track');
+      function pause(){ tracks.forEach(function(t){ t.style.animationPlayState = 'paused'; }); }
+      function resume(){ tracks.forEach(function(t){ t.style.animationPlayState = ''; }); }
+      marquee.addEventListener('pointerenter', function(e){ if(e.pointerType === 'mouse'){ resume(); pause(); } });
+      marquee.addEventListener('pointerleave', function(e){ if(e.pointerType === 'mouse'){ resume(); } });
+    });
+    document.querySelectorAll('.statics-carousel').forEach(function(carousel){
+      var tracks = carousel.querySelectorAll('.statics-track');
+      function pause(){ tracks.forEach(function(t){ t.style.animationPlayState = 'paused'; }); }
+      function resume(){ tracks.forEach(function(t){ t.style.animationPlayState = ''; }); }
+      carousel.addEventListener('pointerenter', function(e){ if(e.pointerType === 'mouse'){ resume(); pause(); } });
+      carousel.addEventListener('pointerleave', function(e){ if(e.pointerType === 'mouse'){ resume(); } });
+    });
   })();
 
   (function(){
@@ -858,11 +970,15 @@
   (function(){
     var catButtons = document.querySelectorAll('.cat-btn');
     if(!catButtons.length) return;
-    var cards = document.querySelectorAll('#galleryReels .media-card, #galleryStatics .media-card, #galleryGrids .media-card');
+    var cards = document.querySelectorAll('#galleryReels .media-card, #galleryGrids .media-card');
+    var staticsTracks = document.querySelectorAll('.statics-track');
+    var logoTracks = document.querySelectorAll('.logo-track');
     function setActive(activeBtn){
       var cat = activeBtn.dataset.cat;
       catButtons.forEach(function(b){ b.classList.toggle('active', b === activeBtn); });
       cards.forEach(function(c){ c.style.display = (c.dataset.category === cat) ? '' : 'none'; });
+      staticsTracks.forEach(function(t){ t.style.display = (t.dataset.cat === cat) ? 'flex' : 'none'; });
+      logoTracks.forEach(function(t){ t.style.display = (t.dataset.cat === cat) ? 'flex' : 'none'; });
     }
     catButtons.forEach(function(btn){
       btn.addEventListener('click', function(e){
@@ -910,7 +1026,7 @@
       if(lastTrigger){ lastTrigger.focus({preventScroll:true}); }
     }
 
-    document.querySelectorAll('.scroll-row.squares .media-card img, .scroll-row.grids .media-card img, .result-shot img').forEach(function(img){
+    document.querySelectorAll('.statics-showcase .polaroid-slot img, .scroll-row.grids .media-card img, .result-shot img').forEach(function(img){
       img.addEventListener('click', function(){ openLightbox(img); });
       var hint = document.createElement('span');
       hint.className = 'enlarge-hint';
