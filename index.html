@@ -92,6 +92,19 @@
   #mobileMenu a{font-family:"Archivo"; font-weight:700; font-size:1.4rem; text-decoration:none; color:var(--ink);}
   #mobileMenu .btn{margin-top:2rem; align-self:flex-start;}
 
+  #mobileMenu .menu-group-toggle{display:flex; align-items:center; justify-content:space-between; gap:1.2rem; width:100%; background:none; border:none; padding:0; font-family:"Archivo"; font-weight:700; font-size:1.4rem; color:var(--ink); cursor:pointer; text-align:left;}
+  #mobileMenu .menu-icon{width:28px; height:28px; min-width:28px; border-radius:50%; border:1px solid var(--line-strong); display:flex; align-items:center; justify-content:center; color:var(--ink-muted); position:relative; transition:border-color .2s ease, color .2s ease;}
+  #mobileMenu .menu-icon::before, #mobileMenu .menu-icon::after{content:""; position:absolute; background:currentColor; transition:transform .25s ease;}
+  #mobileMenu .menu-icon::before{width:11px; height:1.5px;}
+  #mobileMenu .menu-icon::after{width:1.5px; height:11px;}
+  #mobileMenu .menu-group.open .menu-icon::after{transform:scaleY(0);}
+  #mobileMenu .menu-group.open .menu-icon{border-color:var(--accent); color:var(--accent);}
+  #mobileMenu ul.menu-submenu{list-style:none; margin:0; padding:0; gap:0; max-height:0; overflow:hidden; transition:max-height .35s ease;}
+  #mobileMenu .menu-group.open ul.menu-submenu{max-height:360px; margin-top:1rem;}
+  #mobileMenu .menu-submenu li{padding:0;}
+  #mobileMenu .menu-submenu a{font-family:"IBM Plex Mono"; font-weight:500; font-size:1rem; letter-spacing:.02em; color:var(--ink-muted); text-decoration:none; display:block; padding:.6rem 0 .6rem .9rem; border-left:2px solid var(--line-strong);}
+  #mobileMenu .menu-submenu a:hover{color:var(--accent); border-left-color:var(--accent);}
+
   /* ---------- loading screen ---------- */
   #loader{position:fixed; inset:0; z-index:1000; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1.5rem; background:radial-gradient(120% 85% at 85% 0%, rgba(255,138,77,.28), transparent 60%), radial-gradient(80% 60% at 10% 100%, rgba(255,138,77,.10), transparent 65%), #15100b; transition:opacity .45s ease;}
   html[data-skip-loader] #loader{display:none;}
@@ -410,6 +423,19 @@
   </div>
   <ul>
     <li><a href="#work">Work</a></li>
+    <li class="menu-group" id="projectsGroup">
+      <button class="menu-group-toggle" id="projectsToggle" aria-expanded="false" aria-controls="projectsSubmenu">
+        Projects
+        <span class="menu-icon" aria-hidden="true"></span>
+      </button>
+      <ul class="menu-submenu" id="projectsSubmenu">
+        <li><a href="#work" data-cat-label="Clothing">Clothing</a></li>
+        <li><a href="#work" data-cat-label="Jewellery">Jewellery</a></li>
+        <li><a href="#work" data-cat-label="Academic">Academic</a></li>
+        <li><a href="#work" data-cat-label="Cafés">Cafés</a></li>
+        <li><a href="#work" data-cat-label="Salons">Salons</a></li>
+      </ul>
+    </li>
     <li><a href="#results">Results</a></li>
     <li><a href="#websites">Websites</a></li>
     <li><a href="#process">Process</a></li>
@@ -963,6 +989,30 @@
   burger.addEventListener('click', function(){ menu.classList.add('open'); burger.setAttribute('aria-expanded','true'); });
   closeBtn.addEventListener('click', function(){ menu.classList.remove('open'); burger.setAttribute('aria-expanded','false'); });
   menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ menu.classList.remove('open'); }); });
+
+  // projects accordion: expands to the same 5 category links used by the Work pills
+  (function(){
+    var group = document.getElementById('projectsGroup');
+    if(!group) return;
+    var projectsToggle = document.getElementById('projectsToggle');
+    projectsToggle.addEventListener('click', function(){
+      var isOpen = group.classList.contains('open');
+      group.classList.toggle('open', !isOpen);
+      projectsToggle.setAttribute('aria-expanded', String(!isOpen));
+    });
+    group.querySelectorAll('.menu-submenu a').forEach(function(a){
+      a.addEventListener('click', function(e){
+        e.preventDefault();
+        var label = a.dataset.catLabel;
+        var match = Array.prototype.find.call(document.querySelectorAll('.cat-btn'), function(b){
+          return b.textContent.trim() === label;
+        });
+        if(match){ match.click(); }
+        var work = document.getElementById('work');
+        if(work){ work.scrollIntoView({behavior:'smooth', block:'start'}); }
+      });
+    });
+  })();
 
   document.getElementById('year').textContent = 'Growvex Digital © ' + new Date().getFullYear();
 
