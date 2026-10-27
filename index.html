@@ -467,7 +467,7 @@
           <div class="orbit-avatar"><video class="orbit-video" autoplay muted loop playsinline poster="assets/academic/academic-static-3.jpeg"><source src="assets/academic/academic-reel-1.mp4" type="video/mp4" /></video></div>
         </div>
         <div class="hero-phone">
-          <video autoplay muted loop playsinline poster="assets/logo.png"><source src="assets/hero-video.mp4" type="video/mp4" /></video>
+          <video autoplay muted loop playsinline webkit-playsinline preload="auto" poster="assets/logo.png"><source src="assets/hero-video.mp4" type="video/mp4" /></video>
         </div>
         <div class="hero-orbit hero-orbit-r">
           <div class="orbit-avatar"><video class="orbit-video" autoplay muted loop playsinline poster="assets/d2c/d2c-static-3.jpeg"><source src="assets/d2c/d2c-reel-3.mp4" type="video/mp4" /></video></div>
@@ -1025,9 +1025,16 @@
     vids.forEach(function(v){
       v.addEventListener('loadeddata', kick, {once:true});
       v.addEventListener('canplay', kick, {once:true});
+      v.addEventListener('stalled', kick);
+      v.addEventListener('waiting', kick);
     });
     kick();
     document.addEventListener('visibilitychange', function(){ if(!document.hidden){ kick(); } });
+    // some mobile browsers withhold autoplay entirely until the first
+    // touch/scroll on the page, even for muted video — retry right then.
+    ['touchstart','scroll','pointerdown'].forEach(function(evt){
+      document.addEventListener(evt, kick, {once:true, passive:true});
+    });
   })();
 
   document.getElementById('year').textContent = 'Growvex Digital © ' + new Date().getFullYear();
