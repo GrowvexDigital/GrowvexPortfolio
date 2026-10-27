@@ -902,6 +902,17 @@
 </div>
 
 <script>
+  // shared by the loader (below) and the decorative-video IIFE further down:
+  // a video covered by the full-screen loader overlay can fail WebKit's
+  // "must be visible to autoplay" heuristic, so re-kick playback the moment
+  // the overlay actually clears, not just on load/canplay.
+  function kickHeroVideos(){
+    document.querySelectorAll('.hero-phone video, .orbit-video').forEach(function(v){
+      var p = v.play();
+      if(p && typeof p.catch === 'function'){ p.catch(function(){}); }
+    });
+  }
+
   (function(){
     var loader = document.getElementById('loader');
     if(!loader || document.documentElement.hasAttribute('data-skip-loader')) return;
@@ -920,7 +931,8 @@
       setTimeout(function(){
         loader.classList.add('loader-out');
         try{ sessionStorage.setItem('gv-loaded', '1'); }catch(e){}
-        loader.addEventListener('transitionend', function(){ loader.style.display = 'none'; }, {once:true});
+        kickHeroVideos();
+        loader.addEventListener('transitionend', function(){ loader.style.display = 'none'; kickHeroVideos(); }, {once:true});
       }, 250);
     }
     fill.addEventListener('animationend', finish, {once:true});
@@ -1016,24 +1028,18 @@
   // once several video elements load on the same page.
   (function(){
     var vids = document.querySelectorAll('.hero-phone video, .orbit-video');
-    function kick(){
-      vids.forEach(function(v){
-        var p = v.play();
-        if(p && typeof p.catch === 'function'){ p.catch(function(){}); }
-      });
-    }
     vids.forEach(function(v){
-      v.addEventListener('loadeddata', kick, {once:true});
-      v.addEventListener('canplay', kick, {once:true});
-      v.addEventListener('stalled', kick);
-      v.addEventListener('waiting', kick);
+      v.addEventListener('loadeddata', kickHeroVideos, {once:true});
+      v.addEventListener('canplay', kickHeroVideos, {once:true});
+      v.addEventListener('stalled', kickHeroVideos);
+      v.addEventListener('waiting', kickHeroVideos);
     });
-    kick();
-    document.addEventListener('visibilitychange', function(){ if(!document.hidden){ kick(); } });
+    kickHeroVideos();
+    document.addEventListener('visibilitychange', function(){ if(!document.hidden){ kickHeroVideos(); } });
     // some mobile browsers withhold autoplay entirely until the first
     // touch/scroll on the page, even for muted video — retry right then.
     ['touchstart','scroll','pointerdown'].forEach(function(evt){
-      document.addEventListener(evt, kick, {once:true, passive:true});
+      document.addEventListener(evt, kickHeroVideos, {once:true, passive:true});
     });
   })();
 
