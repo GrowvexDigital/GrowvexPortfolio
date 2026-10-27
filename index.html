@@ -191,7 +191,7 @@
   @media (max-width:860px){ .spotlight{grid-template-columns:1fr;} .spotlight-img{max-width:360px; margin:0 auto;} }
 
   /* ---------- category filter ---------- */
-  .cat-scroll{display:flex; gap:.6rem; overflow-x:auto; scrollbar-width:none; -ms-overflow-style:none; margin-bottom:clamp(2.2rem,5vw,3rem);}
+  .cat-scroll{display:flex; gap:.6rem; overflow-x:auto; scrollbar-width:none; -ms-overflow-style:none; margin-bottom:clamp(2.2rem,5vw,3rem); scroll-margin-top:6rem;}
   .cat-scroll::-webkit-scrollbar{display:none;}
   .cat-btn{flex:0 0 auto; font-family:"IBM Plex Mono"; font-size:.76rem; letter-spacing:.04em; padding:.55rem 1.1rem; border-radius:999px; border:1px solid color-mix(in srgb, var(--accent) 35%, transparent); background:var(--accent-dim); color:var(--accent); cursor:pointer; white-space:nowrap; transition:background .2s ease, border-color .2s ease, color .2s ease; text-decoration:none; display:inline-flex; align-items:center;}
   .cat-btn:hover{border-color:var(--accent); color:var(--ink);}
@@ -1008,8 +1008,8 @@
           return b.textContent.trim() === label;
         });
         if(match){ match.click(); }
-        var work = document.getElementById('work');
-        if(work){ work.scrollIntoView({behavior:'smooth', block:'start'}); }
+        var pills = document.querySelector('.cat-scroll');
+        if(pills){ pills.scrollIntoView({behavior:'smooth', block:'start'}); }
       });
     });
   })();
