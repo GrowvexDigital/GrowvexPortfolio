@@ -142,20 +142,24 @@
   .hero-ctas .btn-ghost{background:transparent; color:#fff; border:1.5px solid rgba(255,255,255,.65) !important;}
   .hero-ctas .btn-ghost svg{border:1.5px solid rgba(255,255,255,.65); border-radius:50%; padding:4px; box-sizing:content-box; width:12px; height:12px;}
 
-  .hero-visual{position:relative; max-width:900px; margin:clamp(2.5rem,6vw,4rem) auto 0; height:clamp(320px,46vw,460px); display:flex; align-items:center; justify-content:center;}
-  .hero-blob{position:absolute; width:min(560px,78vw); height:min(560px,78vw); left:50%; top:50%; transform:translate(-50%,-50%); background:linear-gradient(160deg, var(--accent), color-mix(in srgb, var(--accent) 70%, #ff9d5c)); border-radius:62% 38% 55% 45% / 48% 62% 38% 52%; animation:blobMorph 9s ease-in-out infinite; z-index:0;}
-  @keyframes blobMorph{0%,100%{border-radius:62% 38% 55% 45% / 48% 62% 38% 52%;} 50%{border-radius:45% 55% 40% 60% / 55% 45% 60% 40%;}}
-  .hero-phone{position:relative; z-index:2; width:clamp(180px,20vw,230px); aspect-ratio:9/19; border-radius:34px; background:#0c0906; padding:7px; box-shadow:0 34px 60px -20px rgba(0,0,0,.45);}
+  .hero-visual{position:relative; max-width:1200px; margin:clamp(2.5rem,6vw,4rem) auto 0; display:flex; align-items:center; justify-content:center; padding:0 .5rem;}
+  .hero-phone{position:relative; z-index:5; flex:0 0 auto; width:clamp(190px,21vw,240px); aspect-ratio:9/19; border-radius:34px; background:#0c0906; padding:7px; box-shadow:0 34px 60px -20px rgba(0,0,0,.45);}
   .hero-phone video{width:100%; height:100%; object-fit:cover; border-radius:28px;}
-  .hero-orbit{position:absolute; top:50%; transform:translateY(-50%); display:flex; flex-direction:column; gap:1.6rem; z-index:3;}
-  .hero-orbit-l{left:clamp(-2%,4vw,8%);}
-  .hero-orbit-r{right:clamp(-2%,4vw,8%);}
-  .orbit-avatar{width:clamp(92px,11vw,132px); height:clamp(92px,11vw,132px); border-radius:50%; overflow:hidden; border:4px solid var(--bg); box-shadow:0 14px 28px -10px rgba(0,0,0,.35); animation:orbitFloat 5s ease-in-out infinite;}
-  .hero-orbit-r .orbit-avatar{animation-delay:.6s;}
-  .orbit-avatar img, .orbit-avatar video{width:100%; height:100%; object-fit:cover;}
-  @keyframes orbitFloat{0%,100%{transform:translateY(0);} 50%{transform:translateY(-10px);}}
-  @media (prefers-reduced-motion: reduce){ .hero-blob, .orbit-avatar{animation:none;} }
-  @media (max-width:640px){ .hero-orbit{display:none;} }
+  .hero-reels{display:flex; align-items:center;}
+  .reel-card{flex:0 0 auto; width:clamp(74px,9vw,128px); aspect-ratio:9/16; border-radius:18px; overflow:hidden; border:3px solid #fff; box-shadow:0 20px 38px -16px rgba(20,8,0,.4); margin-left:-1.6rem;}
+  .reel-card:first-child{margin-left:0;}
+  .reel-card video{width:100%; height:100%; object-fit:cover;}
+  .hero-reels-l .reel-card.r1{width:clamp(96px,11.5vw,158px); z-index:4;}
+  .hero-reels-l .reel-card.r2{width:clamp(84px,10vw,140px); z-index:3; opacity:.88;}
+  .hero-reels-l .reel-card.r3{width:clamp(70px,8.4vw,116px); z-index:2; opacity:.6;}
+  .hero-reels-r .reel-card.r1{width:clamp(96px,11.5vw,158px); z-index:4;}
+  .hero-reels-r .reel-card.r2{width:clamp(84px,10vw,140px); z-index:3; opacity:.88;}
+  .hero-reels-r .reel-card.r3{width:clamp(70px,8.4vw,116px); z-index:2; opacity:.6;}
+  .hero-reels-l .reel-card.r1{margin-left:-2.2rem;}
+  .hero-reels-r{flex-direction:row;}
+  .hero-reels-r .reel-card.r1{margin-left:-2.2rem;}
+  @media (max-width:900px){ .hero-reels-l .reel-card.r3, .hero-reels-r .reel-card.r3{display:none;} }
+  @media (max-width:640px){ .hero-reels{display:none;} }
 
   /* ---------- growth partners ticker ---------- */
   #ticker{padding:1.1rem 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:var(--bg-raised); overflow:hidden;}
@@ -495,15 +499,18 @@
       </div>
 
       <div class="hero-visual reveal">
-        <div class="hero-blob"></div>
-        <div class="hero-orbit hero-orbit-l">
-          <div class="orbit-avatar"><video class="orbit-video" autoplay muted loop playsinline poster="assets/academic/academic-static-3.jpeg"><source src="assets/academic/academic-reel-1.mp4" type="video/mp4" /></video></div>
+        <div class="hero-reels hero-reels-l">
+          <div class="reel-card r3"><video class="hero-reel-video" autoplay muted loop playsinline poster="assets/d2c/d2c-static-1.jpeg"><source src="assets/d2c/d2c-reel-4.mp4" type="video/mp4" /></video></div>
+          <div class="reel-card r2"><video class="hero-reel-video" autoplay muted loop playsinline poster="assets/food-beverage/fb-static-1.jpeg"><source src="assets/food-beverage/fb-reel-2.mp4" type="video/mp4" /></video></div>
+          <div class="reel-card r1"><video class="hero-reel-video" autoplay muted loop playsinline poster="assets/academic/academic-static-3.jpeg"><source src="assets/academic/academic-reel-2.mp4" type="video/mp4" /></video></div>
         </div>
         <div class="hero-phone">
           <video autoplay muted loop playsinline webkit-playsinline preload="auto" poster="assets/logo.png"><source src="assets/hero-video.mp4" type="video/mp4" /></video>
         </div>
-        <div class="hero-orbit hero-orbit-r">
-          <div class="orbit-avatar"><video class="orbit-video" autoplay muted loop playsinline poster="assets/d2c/d2c-static-3.jpeg"><source src="assets/d2c/d2c-reel-3.mp4" type="video/mp4" /></video></div>
+        <div class="hero-reels hero-reels-r">
+          <div class="reel-card r1"><video class="hero-reel-video" autoplay muted loop playsinline poster="assets/d2c/d2c-static-3.jpeg"><source src="assets/d2c/d2c-reel-6.mp4" type="video/mp4" /></video></div>
+          <div class="reel-card r2"><video class="hero-reel-video" autoplay muted loop playsinline poster="assets/food-beverage/fb-static-2.jpeg"><source src="assets/food-beverage/fb-reel-3.mp4" type="video/mp4" /></video></div>
+          <div class="reel-card r3"><video class="hero-reel-video" autoplay muted loop playsinline poster="assets/d2c/d2c-static-7.jpeg"><source src="assets/d2c/d2c-reel-7.mp4" type="video/mp4" /></video></div>
         </div>
       </div>
     </div>
@@ -961,7 +968,7 @@
   // "must be visible to autoplay" heuristic, so re-kick playback the moment
   // the overlay actually clears, not just on load/canplay.
   function kickHeroVideos(){
-    document.querySelectorAll('.hero-phone video, .orbit-video').forEach(function(v){
+    document.querySelectorAll('.hero-phone video, .hero-reel-video').forEach(function(v){
       var p = v.play();
       if(p && typeof p.catch === 'function'){ p.catch(function(){}); }
     });
@@ -1081,7 +1088,7 @@
   // attribute-only autoplay can silently stay paused on some browsers
   // once several video elements load on the same page.
   (function(){
-    var vids = document.querySelectorAll('.hero-phone video, .orbit-video');
+    var vids = document.querySelectorAll('.hero-phone video, .hero-reel-video');
     vids.forEach(function(v){
       v.addEventListener('loadeddata', kickHeroVideos, {once:true});
       v.addEventListener('canplay', kickHeroVideos, {once:true});
