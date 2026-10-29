@@ -247,18 +247,25 @@
   }
 
   /* ---------- work spotlight ---------- */
-  .spotlight{display:grid; grid-template-columns:0.8fr 1fr; gap:clamp(2rem,5vw,3.5rem); align-items:center; margin-bottom:clamp(3rem,6vw,4.5rem);}
+  #work .sec-head{flex-direction:column; align-items:center; text-align:center;}
+  #work .sec-head h2{max-width:none;}
+
+  .spotlight{position:relative; border-radius:28px; overflow:hidden; margin-bottom:clamp(3rem,6vw,4.5rem); box-shadow:0 30px 60px -24px rgba(0,0,0,.25);}
+  .spotlight-img{aspect-ratio:21/10; min-height:320px;}
+  .spotlight-img img{width:100%; height:100%; object-fit:cover; display:block;}
+  .spotlight-badge{position:absolute; top:1.6rem; left:1.6rem; display:inline-flex; align-items:center; gap:.4rem; font-family:"Archivo"; font-weight:700; font-size:.85rem; padding:.55rem 1.1rem; border-radius:999px; background:#fff; color:var(--accent); box-shadow:0 10px 24px -10px rgba(0,0,0,.35);}
+  .spotlight-copy{position:absolute; top:50%; right:clamp(1.2rem,4vw,3rem); transform:translateY(-50%); background:#fff; border-radius:22px; padding:clamp(1.5rem,3vw,2.2rem); width:min(420px,42%); box-shadow:0 30px 60px -20px rgba(0,0,0,.35);}
   .spotlight-copy .tags{display:flex; flex-wrap:wrap; gap:.5rem; margin-bottom:1.1rem;}
-  .spotlight-copy .tag{font-family:"IBM Plex Mono"; font-size:.68rem; letter-spacing:.06em; text-transform:uppercase; padding:.35rem .8rem; border-radius:999px; background:var(--accent-dim); color:var(--accent); border:1px solid color-mix(in srgb, var(--accent) 35%, transparent);}
-  .spotlight-copy .badge-new{display:inline-flex; align-items:center; gap:.4rem; font-family:"IBM Plex Mono"; font-size:.68rem; letter-spacing:.06em; text-transform:uppercase; padding:.35rem .8rem; border-radius:999px; background:var(--ink); color:var(--bg); margin-bottom:1rem;}
-  .spotlight-copy h3{font-family:"Fraunces Display"; font-weight:600; font-size:clamp(1.8rem,3.4vw,2.6rem); letter-spacing:-0.01em; margin:0 0 .9rem;}
-  .spotlight-copy p{color:var(--ink-muted); font-size:1rem; max-width:48ch; margin:0 0 1.3rem;}
-  .spotlight-stat{display:inline-flex; align-items:center; gap:.7rem; padding:.8rem 1.3rem; border-radius:16px; background:var(--accent); color:var(--accent-ink); font-family:"Archivo"; font-weight:800;}
-  .spotlight-stat b{font-size:1.4rem;}
-  .spotlight-stat span{font-family:"IBM Plex Sans"; font-weight:500; font-size:.82rem; display:block; opacity:.85;}
-  .spotlight-img{border-radius:28px; overflow:hidden; border:1px solid var(--line-strong); box-shadow:0 30px 60px -24px rgba(0,0,0,.25); aspect-ratio:4/5;}
-  .spotlight-img img{width:100%; height:100%; object-fit:cover;}
-  @media (max-width:860px){ .spotlight{grid-template-columns:1fr;} .spotlight-img{max-width:360px; margin:0 auto;} }
+  .spotlight-copy .tag{font-family:"Archivo"; font-weight:700; font-size:.76rem; padding:.5rem 1rem; border-radius:999px; background:var(--accent); color:var(--accent-ink);}
+  .spotlight-copy h3{font-family:"Archivo"; font-weight:800; font-size:clamp(1.4rem,2.4vw,1.8rem); letter-spacing:-0.01em; margin:0 0 .7rem; color:#18110a;}
+  .spotlight-copy p{color:#4a4038; font-size:.92rem; line-height:1.55; margin:0 0 1.1rem;}
+  .spotlight-stat{border-top:1px solid #e4dcd0; padding-top:1rem; display:flex; align-items:baseline; flex-wrap:wrap; gap:.6rem;}
+  .spotlight-stat b{font-family:"Archivo"; font-weight:800; font-size:1.5rem; color:var(--accent);}
+  .spotlight-stat span{font-size:.82rem; color:#6b5c4d;}
+  @media (max-width:860px){
+    .spotlight-img{aspect-ratio:4/5; min-height:0;}
+    .spotlight-copy{position:static; transform:none; width:auto; margin:0; border-radius:0; box-shadow:none; padding:1.6rem 1.25rem;}
+  }
 
   /* ---------- category filter ---------- */
   .cat-scroll{display:flex; gap:.6rem; overflow-x:auto; scrollbar-width:none; -ms-overflow-style:none; margin-bottom:clamp(2.2rem,5vw,3rem); scroll-margin-top:6rem;}
@@ -664,26 +671,25 @@
   <section id="work" class="numbered">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div><p class="eyebrow">Our Work</p><h2>Don&rsquo;t take our word for it</h2></div>
+        <div><p class="eyebrow dot pill">Our Work</p><h2>Don&rsquo;t take our word for it</h2></div>
       </div>
 
       <div class="spotlight reveal">
         <div class="spotlight-img">
           <img src="assets/d2c/d2c-static-3.jpeg" alt="Winsome Boutique campaign creative" loading="lazy" />
         </div>
+        <span class="spotlight-badge">&#127874; Best work in 2026</span>
         <div class="spotlight-copy">
-          <span class="badge-new">Best work in 2026</span>
           <div class="tags">
-            <span class="tag">D2C</span>
-            <span class="tag">Ethnic Clothing</span>
+            <span class="tag">D2C Ethnic Clothing</span>
             <span class="tag">Meta + Google Ads</span>
             <span class="tag">Website CRO</span>
           </div>
           <h3>Winsome Boutique</h3>
           <p>A women&rsquo;s wear label for Indian ethnic and Indo-western dressing: kurta sets, lehengas, kaftans and easy cotton dresses, finished with handwork like zardozi and mirror embroidery. Growvex built its Shopify store and handles its social media and ad creatives.</p>
           <div class="spotlight-stat">
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3l4 4-4 4M21 7H10M7 21l-4-4 4-4M3 17h11"/></svg>
-            <span><b>5.2x ROAS</b><span>In the 3rd month &mdash; came to us at 1.2x</span></span>
+            <b>5.2x ROAS</b>
+            <span>In the 3rd month, came to us at 1.2x</span>
           </div>
         </div>
       </div>
