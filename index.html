@@ -162,11 +162,9 @@
   @media (max-width:640px){ .hero-reels{display:none;} }
 
   /* ---------- growth partners ticker ---------- */
-  #ticker{padding:1.1rem 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:var(--bg-raised); overflow:hidden;}
-  .ticker-track{display:flex; gap:3rem; white-space:nowrap; width:max-content; animation:tickerScroll 28s linear infinite;}
+  #ticker{padding:.4rem 0 1.1rem; overflow:hidden; -webkit-mask-image:linear-gradient(90deg, transparent, black 5%, black 95%, transparent); mask-image:linear-gradient(90deg, transparent, black 5%, black 95%, transparent);}
+  .ticker-track{display:flex; gap:2.6rem; width:max-content; animation:tickerScroll 30s linear infinite; align-items:center;}
   @media (prefers-reduced-motion: reduce){ .ticker-track{animation:none;} }
-  .ticker-track span{font-family:"Fraunces Display"; font-style:italic; font-weight:500; font-size:1.05rem; color:var(--ink-muted);}
-  .ticker-track span b{color:var(--accent); font-weight:500; font-style:italic;}
   @keyframes tickerScroll{from{transform:translateX(0);} to{transform:translateX(-50%);}}
 
   .highlight-line{max-width:620px; margin:clamp(3rem,7vw,4.5rem) auto; text-align:center; padding:0 1.5rem;}
@@ -519,8 +517,30 @@
   <p class="eyebrow ticker-label">Growth Partners</p>
   <div id="ticker">
     <div class="ticker-track">
-      <span><b>Meta Ads</b></span><span>Google Ads</span><span><b>UGC Creatives</b></span><span>Shopify Growth</span><span><b>Lead Generation</b></span><span>Social Media</span>
-      <span><b>Meta Ads</b></span><span>Google Ads</span><span><b>UGC Creatives</b></span><span>Shopify Growth</span><span><b>Lead Generation</b></span><span>Social Media</span>
+      <div class="logo-cell"><img src="assets/brands/kake-di-hatti.png" alt="Kake Di Hatti" /></div>
+      <div class="logo-cell"><img src="assets/brands/seams-beyond.png" alt="Seams Beyond" /></div>
+      <div class="logo-cell"><img src="assets/brands/researchcraft.png" alt="ResearchCraft" /></div>
+      <div class="logo-cell"><img src="assets/brands/elly.png" alt="Elly" /></div>
+      <div class="logo-cell"><img src="assets/brands/thesiszen.png" alt="ThesisZen" /></div>
+      <div class="logo-cell"><img src="assets/brands/dchica.png" alt="dChica" /></div>
+      <div class="logo-cell"><img src="assets/brands/myschool-logo.jpeg" alt="MY School" /></div>
+      <div class="logo-cell"><img src="assets/brands/winsome.png" alt="Winsome" /></div>
+      <div class="logo-cell"><img src="assets/brands/rootin.png" alt="Rootin Official" /></div>
+      <div class="logo-cell"><img src="assets/brands/poiesis_logo.png" alt="Poiesis" /></div>
+      <div class="logo-cell"><img src="assets/brands/street-jutsu-logo.jpeg" alt="Street Jutsu" /></div>
+      <div class="logo-cell"><img src="assets/brands/mitraa.png" alt="Mitraa Café Couture" /></div>
+      <div class="logo-cell" aria-hidden="true"><img src="assets/brands/kake-di-hatti.png" alt="" /></div>
+      <div class="logo-cell" aria-hidden="true"><img src="assets/brands/seams-beyond.png" alt="" /></div>
+      <div class="logo-cell" aria-hidden="true"><img src="assets/brands/researchcraft.png" alt="" /></div>
+      <div class="logo-cell" aria-hidden="true"><img src="assets/brands/elly.png" alt="" /></div>
+      <div class="logo-cell" aria-hidden="true"><img src="assets/brands/thesiszen.png" alt="" /></div>
+      <div class="logo-cell" aria-hidden="true"><img src="assets/brands/dchica.png" alt="" /></div>
+      <div class="logo-cell" aria-hidden="true"><img src="assets/brands/myschool-logo.jpeg" alt="" /></div>
+      <div class="logo-cell" aria-hidden="true"><img src="assets/brands/winsome.png" alt="" /></div>
+      <div class="logo-cell" aria-hidden="true"><img src="assets/brands/rootin.png" alt="" /></div>
+      <div class="logo-cell" aria-hidden="true"><img src="assets/brands/poiesis_logo.png" alt="" /></div>
+      <div class="logo-cell" aria-hidden="true"><img src="assets/brands/street-jutsu-logo.jpeg" alt="" /></div>
+      <div class="logo-cell" aria-hidden="true"><img src="assets/brands/mitraa.png" alt="" /></div>
     </div>
   </div>
 
@@ -1015,6 +1035,13 @@
     document.querySelectorAll('.founder-marquee').forEach(function(marquee){
       var track = marquee.querySelector('.founder-grid');
       if(!track) return;
+      function pause(){ track.style.animationPlayState = 'paused'; }
+      function resume(){ track.style.animationPlayState = ''; }
+      marquee.addEventListener('pointerenter', function(e){ if(e.pointerType === 'mouse'){ resume(); pause(); } });
+      marquee.addEventListener('pointerleave', function(e){ if(e.pointerType === 'mouse'){ resume(); } });
+    });
+    document.querySelectorAll('#ticker').forEach(function(marquee){
+      var track = marquee.querySelector('.ticker-track');
       function pause(){ track.style.animationPlayState = 'paused'; }
       function resume(){ track.style.animationPlayState = ''; }
       marquee.addEventListener('pointerenter', function(e){ if(e.pointerType === 'mouse'){ resume(); pause(); } });
