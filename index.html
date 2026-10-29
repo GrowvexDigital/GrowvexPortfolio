@@ -67,14 +67,16 @@
   .btn svg{width:15px; height:15px;}
 
   /* ---------- nav ---------- */
-  #nav{position:sticky; top:0; z-index:50; background:color-mix(in srgb, var(--bg) 80%, transparent); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border-bottom:1px solid var(--line);}
-  .navrow{max-width:var(--maxw); margin:0 auto; padding:.9rem clamp(1.25rem,4vw,2.5rem); display:flex; align-items:center; justify-content:space-between; gap:1rem;}
+  #nav{position:sticky; top:0; z-index:50; background:transparent; padding-top:clamp(.8rem,2vw,1.3rem);}
+  .navrow{max-width:var(--maxw); margin:0 auto; padding:.7rem .8rem .7rem 1.4rem; display:flex; align-items:center; justify-content:space-between; gap:1rem; background:var(--bg); border-radius:999px; box-shadow:0 16px 34px -16px rgba(20,10,0,.35);}
   .brand{display:flex; align-items:center; gap:.6rem; font-family:"Archivo"; font-weight:800; font-size:1rem; letter-spacing:-.01em; text-decoration:none;}
   .brand img{width:26px; height:26px; border-radius:6px;}
   .navlinks{display:flex; gap:1.7rem; list-style:none; margin:0; padding:0;}
   .navlinks a{font-size:.84rem; text-decoration:none; color:var(--ink-muted); transition:color .2s ease;}
   .navlinks a:hover{color:var(--ink);}
   .navcta{display:flex; align-items:center; gap:1rem;}
+  .navcta .btn{--btn-shadow:transparent; border:none; box-shadow:none;}
+  .navcta .btn:hover, .navcta .btn:active{transform:none; box-shadow:none;}
   .navburger{display:flex; background:none; border:1px solid var(--line-strong); border-radius:8px; width:38px; height:38px; align-items:center; justify-content:center; color:var(--ink); cursor:pointer;}
   .navburger svg{width:18px; height:18px; flex-shrink:0;}
   .theme-toggle{display:flex; flex-shrink:0; background:none; border:1px solid var(--line-strong); border-radius:8px; width:38px; height:38px; align-items:center; justify-content:center; color:var(--ink); cursor:pointer;}
@@ -124,13 +126,21 @@
   }
 
   /* ---------- hero ---------- */
-  #hero{padding:clamp(2.5rem,6vw,4rem) 0 0; overflow:visible;}
+  .hero-glow{position:absolute; top:0; left:0; right:0; height:clamp(700px,72vw,1000px); z-index:-1; pointer-events:none; background:radial-gradient(72% 92% at 50% 0%, #c23e09 0%, #c23e09 56%, color-mix(in srgb, #c23e09 65%, transparent) 74%, transparent 93%);}
+  #hero{padding:clamp(1.5rem,4vw,2.5rem) 0 0; overflow:visible;}
   .hero-inner{max-width:720px; margin:0 auto; text-align:center;}
-  .hero-inner .eyebrow{justify-content:center;}
-  h1.display{font-size:clamp(2.8rem,7vw,5.6rem); line-height:0.98; letter-spacing:-0.03em; margin-top:1rem;}
-  h1.display .accent-word{color:var(--accent);}
-  .hero-lede{margin:1.2rem auto 0; font-size:1.08rem; max-width:52ch; color:var(--ink-muted);}
+  .hero-inner .eyebrow{justify-content:center; background:#fff; color:#c23e09; padding:.55rem 1.1rem; border-radius:999px; box-shadow:0 10px 24px -12px rgba(20,10,0,.3);}
+  .hero-inner .eyebrow.dot::before{border-radius:50%; background:#c23e09;}
+  h1.display{font-size:clamp(2.8rem,7vw,5.6rem); line-height:0.98; letter-spacing:-0.03em; margin-top:1.3rem; text-transform:uppercase; color:#fff;}
+  h1.display .accent-word{color:#fff;}
+  .hero-lede{margin:1.2rem auto 0; font-size:1.08rem; max-width:52ch; color:#fff; opacity:.92;}
   .hero-ctas{display:flex; flex-wrap:wrap; justify-content:center; gap:.9rem; margin-top:1.8rem;}
+  .hero-ctas .btn{--btn-shadow:transparent; border:none; box-shadow:none; text-transform:uppercase; font-size:.8rem; letter-spacing:.03em;}
+  .hero-ctas .btn:hover, .hero-ctas .btn:active{transform:none; box-shadow:none;}
+  .hero-ctas .btn-primary{background:#fff; color:#c23e09;}
+  .hero-ctas .btn-primary svg{background:#c23e09; color:#fff; border-radius:50%; padding:5px; box-sizing:content-box; width:14px; height:14px;}
+  .hero-ctas .btn-ghost{background:transparent; color:#fff; border:1.5px solid rgba(255,255,255,.65) !important;}
+  .hero-ctas .btn-ghost svg{border:1.5px solid rgba(255,255,255,.65); border-radius:50%; padding:4px; box-sizing:content-box; width:12px; height:12px;}
 
   .hero-visual{position:relative; max-width:900px; margin:clamp(2.5rem,6vw,4rem) auto 0; height:clamp(320px,46vw,460px); display:flex; align-items:center; justify-content:center;}
   .hero-blob{position:absolute; width:min(560px,78vw); height:min(560px,78vw); left:50%; top:50%; transform:translate(-50%,-50%); background:linear-gradient(160deg, var(--accent), color-mix(in srgb, var(--accent) 70%, #ff9d5c)); border-radius:62% 38% 55% 45% / 48% 62% 38% 52%; animation:blobMorph 9s ease-in-out infinite; z-index:0;}
@@ -398,6 +408,8 @@
 </style>
 <body>
 
+<div class="hero-glow" aria-hidden="true"></div>
+
 <div id="loader" aria-hidden="true">
   <div class="loader-brand">
     <img src="assets/logo-icon.png" alt="" />
@@ -472,10 +484,13 @@
         <p class="hero-lede">We make the content people stop for and run the ads that turn it into orders, walk-ins, admissions and bookings. For apparel and jewellery brands, schools, cafés and salons.</p>
         <div class="hero-ctas">
           <a class="btn btn-primary" href="https://wa.me/917690011223" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l1.65-4.95A8 8 0 1 1 8.5 19.5L3 21z"/><path d="M8.5 9.5a.5.5 0 0 1 1 0v1a.5.5 0 0 1-.146.354l-.5.5a3.5 3.5 0 0 0 2.792 2.792l.5-.5A.5.5 0 0 1 12.5 13.5h1a.5.5 0 0 1 0 1h-.5a5 5 0 0 1-5-5v-.5z" fill="currentColor" stroke="none"/></svg>
             Book free audit
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </a>
-          <a class="btn btn-ghost" href="#work">See our work</a>
+          <a class="btn btn-ghost" href="#work">
+            See our work
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+          </a>
         </div>
       </div>
 
