@@ -167,8 +167,21 @@
   @media (prefers-reduced-motion: reduce){ .ticker-track{animation:none;} }
   @keyframes tickerScroll{from{transform:translateX(0);} to{transform:translateX(-50%);}}
 
-  .highlight-line{max-width:620px; margin:clamp(3rem,7vw,4.5rem) auto; text-align:center; padding:0 1.5rem;}
-  .highlight-line p{font-family:"Fraunces Display"; font-style:italic; font-weight:500; font-size:clamp(1.15rem,2.4vw,1.5rem); color:var(--ink); line-height:1.5; border:1.5px dashed var(--line-strong); border-radius:24px; padding:1.6rem 2rem;}
+  .service-cloud{position:relative; max-width:780px; margin:clamp(3.5rem,8vw,5.5rem) auto; padding:5rem 1.5rem; text-align:center;}
+  .service-cloud h2{font-family:"Archivo"; font-weight:800; font-size:clamp(1.5rem,3.2vw,2.15rem); line-height:1.35; letter-spacing:-0.01em; max-width:34ch; margin:0 auto; color:var(--ink);}
+  .service-cloud h2 b{color:var(--accent); font-weight:800;}
+  .service-tag{position:absolute; font-family:"IBM Plex Sans"; font-weight:700; font-size:.88rem; color:var(--accent); background:var(--bg); padding:.68rem 1.25rem; border-radius:999px; box-shadow:0 0 0 1px var(--line), 0 16px 32px -14px color-mix(in srgb, var(--accent) 55%, transparent); white-space:nowrap;}
+  .service-tag.t1{top:4%; left:2%; transform:rotate(-9deg);}
+  .service-tag.t2{top:0%; left:42%; transform:rotate(4deg);}
+  .service-tag.t3{top:6%; right:1%; transform:rotate(7deg);}
+  .service-tag.t4{bottom:10%; left:0%; transform:rotate(-6deg);}
+  .service-tag.t5{bottom:4%; left:38%; transform:rotate(5deg);}
+  .service-tag.t6{bottom:8%; right:2%; transform:rotate(-8deg);}
+  @media (max-width:760px){
+    .service-cloud{padding:1rem 1.25rem; display:flex; flex-wrap:wrap; justify-content:center; gap:.6rem;}
+    .service-cloud h2{flex-basis:100%; margin-bottom:.6rem;}
+    .service-tag{position:static; transform:none !important;}
+  }
 
   /* ---------- stats intro ---------- */
   #intro .sec-head h2{max-width:14ch;}
@@ -544,8 +557,14 @@
     </div>
   </div>
 
-  <div class="highlight-line reveal">
-    <p>One team plans the campaign, makes the content, runs the ads and reports back in plain language.</p>
+  <div class="service-cloud reveal">
+    <span class="service-tag t1">Meta Ads</span>
+    <span class="service-tag t2">Google Ads</span>
+    <span class="service-tag t3">Social Media</span>
+    <h2>One team plans the <b>campaign</b>, makes the <b>content</b>, runs the <b>ads</b> and reports back in <b>plain language</b>.</h2>
+    <span class="service-tag t4">Shopify Growth</span>
+    <span class="service-tag t5">Lead Generation</span>
+    <span class="service-tag t6">UGC Creatives</span>
   </div>
 
   <section id="intro" class="numbered">
