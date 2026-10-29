@@ -185,20 +185,66 @@
 
   /* ---------- stats intro ---------- */
   #intro .sec-head h2{max-width:14ch;}
-  .stats-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1.1rem;}
-  .stat-card{border-radius:20px; padding:1.6rem 1.5rem; border:1px solid var(--line-strong); background:var(--bg-raised-2); display:flex; flex-direction:column; justify-content:space-between; min-height:150px;}
+  .eyebrow.pill{background:var(--accent); color:var(--accent-ink); padding:.5rem 1.1rem; border-radius:999px;}
+  .eyebrow.pill::before{background:var(--accent-ink);}
+  #intro .sec-head h2{font-size:clamp(1.6rem,3.2vw,2.3rem); line-height:1.4; max-width:46ch;}
+  #intro .sec-head h2 b{color:var(--accent); font-weight:800;}
+
+  .stats-grid{display:grid; grid-template-columns:repeat(4,1fr); grid-template-rows:auto auto; gap:1.1rem;}
+  .stats-grid > :nth-child(1){grid-column:1; grid-row:1 / span 2;}
+  .stats-grid > :nth-child(2){grid-column:2; grid-row:1;}
+  .stats-grid > :nth-child(3){grid-column:2; grid-row:2;}
+  .stats-grid > :nth-child(4){grid-column:3; grid-row:1 / span 2;}
+  .stats-grid > :nth-child(5){grid-column:4; grid-row:1 / span 2;}
+  .stat-card{border-radius:20px; padding:1.6rem 1.5rem; border:1px solid var(--line-strong); background:var(--bg-raised-2); display:flex; flex-direction:column; justify-content:space-between;}
   .stat-card.accent{background:var(--accent); color:var(--accent-ink); border-color:var(--accent);}
-  .stat-card .stat-icon{width:38px; height:38px; border-radius:50%; background:var(--accent-dim); color:var(--accent); display:flex; align-items:center; justify-content:center; margin-bottom:1rem;}
-  .stat-card.accent .stat-icon{background:color-mix(in srgb, var(--accent-ink) 18%, transparent); color:var(--accent-ink);}
-  .stat-card .stat-icon svg{width:18px; height:18px;}
+  .stat-card .stat-icon{width:40px; height:40px; border-radius:11px; background:var(--accent-dim); color:var(--accent); display:flex; align-items:center; justify-content:center; margin-bottom:1rem;}
+  .stat-card.accent .stat-icon{background:#fff; color:var(--accent);}
+  .stat-card .stat-icon svg{width:19px; height:19px;}
   .stat-card b{font-family:"Archivo"; font-weight:800; font-size:1.7rem; display:block;}
   .stat-card span{font-size:.86rem; color:var(--ink-muted); margin-top:.3rem; display:block;}
   .stat-card.accent span{color:color-mix(in srgb, var(--accent-ink) 78%, transparent);}
-  .stat-quote{grid-column:span 2; border-radius:20px; padding:1.6rem 1.7rem; border:1px solid var(--line-strong); background:var(--bg-raised-2);}
-  .stat-quote p.q{font-family:"Fraunces Display"; font-style:italic; font-weight:500; font-size:1.1rem; margin:0 0 .9rem; color:var(--ink);}
-  .stat-quote p.by{font-family:"IBM Plex Mono"; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint); margin:0;}
-  @media (max-width:900px){ .stats-grid{grid-template-columns:1fr 1fr;} .stat-quote{grid-column:span 2;} }
-  @media (max-width:560px){ .stats-grid{grid-template-columns:1fr;} .stat-quote{grid-column:span 1;} }
+
+  .stat-team{border-radius:20px; padding:1.4rem 1.3rem; border:1.5px dashed var(--line-strong); display:flex; flex-direction:column; align-items:center; text-align:center; justify-content:center; gap:.9rem;}
+  .stat-team .avatars{display:flex; gap:.5rem;}
+  .stat-team .avatars span{width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff;}
+  .stat-team .avatars span:nth-child(1){background:#f0a35e;}
+  .stat-team .avatars span:nth-child(2){background:#6b8f71;}
+  .stat-team .avatars span:nth-child(3){background:#c23e09;}
+  .stat-team .avatars span:nth-child(4){background:#7c6fa6;}
+  .stat-team .avatars svg{width:18px; height:18px;}
+  .stat-team b{font-family:"Archivo"; font-weight:800; font-size:.95rem; color:var(--ink);}
+  .stat-fees{border-radius:20px; padding:1.4rem 1.5rem; background:var(--bg-raised-2); display:flex; align-items:center;}
+  .stat-fees p{margin:0; font-size:.92rem; color:var(--ink-muted); line-height:1.5;}
+  .stat-fees p b{color:var(--accent); font-weight:800;}
+
+  .stat-burst{position:relative; width:52px; height:52px; margin:0 auto 1rem; display:flex; align-items:center; justify-content:center;}
+  .stat-burst::before{content:""; position:absolute; inset:0; border-radius:50%; background:repeating-conic-gradient(var(--accent-dim) 0deg 6deg, transparent 6deg 18deg); -webkit-mask-image:radial-gradient(circle, transparent 48%, black 52%, black 70%, transparent 74%); mask-image:radial-gradient(circle, transparent 48%, black 52%, black 70%, transparent 74%);}
+  .stat-burst .dot{position:relative; width:30px; height:30px; border-radius:50%; background:var(--accent); display:flex; align-items:center; justify-content:center; color:#fff;}
+  .stat-burst svg{width:15px; height:15px;}
+  .stat-card.center{align-items:center; text-align:center;}
+  .stat-card .kicker{font-family:"Archivo"; font-weight:800; font-size:1rem; letter-spacing:.02em; color:var(--accent); text-transform:uppercase;}
+
+  .stat-quote{border-radius:20px; padding:1.6rem 1.7rem; border:1.5px solid var(--accent); background:var(--bg); display:flex; flex-direction:column; justify-content:space-between;}
+  .stat-quote .quote-head{display:flex; align-items:flex-start; justify-content:space-between;}
+  .stat-quote .quote-mark{font-family:"Fraunces Display"; font-size:3rem; line-height:1; color:var(--accent); font-weight:600;}
+  .stat-quote .quote-badge{width:30px; height:30px; border-radius:9px; overflow:hidden;}
+  .stat-quote .quote-badge img{width:100%; height:100%; object-fit:cover;}
+  .stat-quote p.q{font-family:"IBM Plex Sans"; font-weight:500; font-size:1rem; margin:.6rem 0 1.1rem; color:var(--ink);}
+  .stat-quote p.by{font-size:.82rem; color:var(--ink-muted); margin:0;}
+  .stat-quote p.by b{color:var(--ink); font-weight:700;}
+  @media (max-width:900px){
+    .stats-grid{grid-template-columns:1fr 1fr;}
+    .stats-grid > :nth-child(1){grid-column:1; grid-row:auto;}
+    .stats-grid > :nth-child(2){grid-column:2; grid-row:auto;}
+    .stats-grid > :nth-child(3){grid-column:2; grid-row:auto;}
+    .stats-grid > :nth-child(4){grid-column:1; grid-row:auto;}
+    .stats-grid > :nth-child(5){grid-column:2; grid-row:auto;}
+  }
+  @media (max-width:560px){
+    .stats-grid{grid-template-columns:1fr;}
+    .stats-grid > :nth-child(1), .stats-grid > :nth-child(2), .stats-grid > :nth-child(3), .stats-grid > :nth-child(4), .stats-grid > :nth-child(5){grid-column:1; grid-row:auto;}
+  }
 
   /* ---------- work spotlight ---------- */
   .spotlight{display:grid; grid-template-columns:0.8fr 1fr; gap:clamp(2rem,5vw,3.5rem); align-items:center; margin-bottom:clamp(3rem,6vw,4.5rem);}
@@ -570,33 +616,46 @@
   <section id="intro" class="numbered">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div><p class="eyebrow">Results</p><h2>Not your usual marketing agency.</h2></div>
-        <p class="lede">The usual one sells you posts and reports likes. We handle ads, content, social and your website, and answer for the sales.</p>
+        <div>
+          <p class="eyebrow dot pill">Results</p>
+          <h2>Not your usual marketing agency. The usual one sells you posts and reports likes. We handle <b>ads, content, social</b> and your <b>website,</b> and answer for the <b>sales.</b></h2>
+        </div>
       </div>
       <div class="stats-grid reveal">
-        <div class="stat-card accent">
+        <div class="stat-card accent tall">
           <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3l4 4-4 4M21 7H10M7 21l-4-4 4-4M3 17h11"/></svg></div>
-          <b>4&ndash;5x</b>
-          <span>Average return on ad spend.</span>
+          <div>
+            <b>4&ndash;5x</b>
+            <span>Average return on ad spend. We report sales, not likes.</span>
+          </div>
         </div>
-        <div class="stat-card">
-          <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"/><path d="M2 21v-2a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v2M17 3.1a4 4 0 0 1 0 7.8M23 21v-2a4 4 0 0 0-3-3.9"/></svg></div>
-          <b>15+</b>
-          <span>Experienced marketers.</span>
+
+        <div class="stat-team">
+          <div class="avatars">
+            <span><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></span>
+            <span><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></span>
+            <span><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></span>
+            <span><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></span>
+          </div>
+          <b>15+ Experienced Marketers</b>
         </div>
-        <div class="stat-card">
-          <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-          <b>&#8377;0</b>
-          <span>Upfront fees for D2C brands. We earn when you do.</span>
+        <div class="stat-fees">
+          <p><b>&#8377;0 Upfront Fees</b> for D2C brands. We earn when you do.</p>
         </div>
-        <div class="stat-card">
-          <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
-          <b>Live in 7 days</b>
+
+        <div class="stat-card tall center">
+          <div class="stat-burst"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></span></div>
+          <span class="kicker">Live in 7 days</span>
           <span>From sign-off to running campaigns, with tracking, creatives and copy set up.</span>
         </div>
-        <div class="stat-quote">
-          <p class="q">&ldquo;Likes don&rsquo;t pay your bills. Orders do. Judge us on that number and nothing else.&rdquo;</p>
-          <p class="by">Prakhar Jain, Founder, Growvex Digital</p>
+
+        <div class="stat-quote tall">
+          <div class="quote-head">
+            <span class="quote-mark">&ldquo;</span>
+            <span class="quote-badge"><img src="assets/logo-icon.png" alt="" /></span>
+          </div>
+          <p class="q">Likes don&rsquo;t pay your bills. Orders do. Judge us on that number and nothing else.</p>
+          <p class="by"><b>Prakhar Jain,</b> Founder, Growvex Digital</p>
         </div>
       </div>
     </div>
