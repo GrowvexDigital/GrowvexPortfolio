@@ -274,7 +274,7 @@
   .cat-btn:hover{color:var(--ink);}
   .cat-btn.active{background:var(--accent); color:var(--accent-ink);}
 
-  .gallery-label{font-family:"IBM Plex Mono"; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); margin:0 0 1rem;}
+  .gallery-label{font-family:"Archivo"; font-weight:800; font-size:clamp(1.3rem,2.6vw,1.8rem); letter-spacing:-0.01em; text-transform:uppercase; color:var(--ink); margin:0 0 1.3rem;}
   .gallery-label.spaced{margin-top:2.8rem;}
 
   /* ---------- brand logos auto-scroll (filtered by category) ---------- */
@@ -328,12 +328,19 @@
   .video-play svg{width:20px; height:20px; margin-left:2px;}
   .video-play:hover{transform:scale(1.08);}
   .media-card.playing .video-play{opacity:0; pointer-events:none;}
-  .video-mute{position:absolute; bottom:.6rem; right:.6rem; width:30px; height:30px; border-radius:50%; background:var(--glass-bg); border:none; color:var(--glass-ink); display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:2; opacity:0; pointer-events:none; transition:opacity .2s ease;}
-  .media-card.playing .video-mute{opacity:1; pointer-events:auto;}
+  .video-mute{position:absolute; bottom:.6rem; right:.6rem; width:32px; height:32px; border-radius:50%; background:var(--accent); border:none; color:var(--accent-ink); display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:2; opacity:1; pointer-events:auto; transition:transform .2s ease;}
+  .video-mute:hover{transform:scale(1.08);}
   .video-mute svg{width:15px; height:15px;}
   .video-mute .mute-slash{opacity:0; transition:opacity .15s ease;}
   .video-mute.is-muted .mute-slash{opacity:1;}
   .scroll-row.reels > .media-card{cursor:default;}
+  .reel-nav-wrap{position:relative;}
+  .reel-nav{position:absolute; top:50%; transform:translateY(-50%); z-index:3; width:44px; height:44px; border-radius:50%; background:var(--accent); color:var(--accent-ink); border:none; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 14px 28px -10px rgba(0,0,0,.35); transition:transform .2s ease;}
+  .reel-nav:hover{transform:translateY(-50%) scale(1.07);}
+  .reel-nav svg{width:20px; height:20px;}
+  .reel-nav.prev{left:-6px;}
+  .reel-nav.next{right:-6px;}
+  @media (max-width:760px){ .reel-nav{display:none;} }
 
   /* ---------- lightbox ---------- */
   .lightbox{position:fixed; inset:0; z-index:100; background:rgba(10,8,5,.92); display:none; align-items:center; justify-content:center; padding:clamp(1.2rem,5vw,3.5rem); cursor:zoom-out;}
@@ -733,6 +740,9 @@
       </div>
 
       <p class="gallery-label spaced">High Impact Reels</p>
+      <div class="reel-nav-wrap">
+      <button type="button" class="reel-nav prev" id="reelsPrev" aria-label="Scroll reels left"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <button type="button" class="reel-nav next" id="reelsNext" aria-label="Scroll reels right"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
       <div class="scroll-row reels reveal" id="galleryReels">
         <div class="media-card" data-category="d2c"><span class="badge">Reel</span><video muted loop playsinline><source src="assets/d2c/d2c-reel-5.mp4" type="video/mp4" /></video></div>
         <div class="media-card" data-category="d2c"><span class="badge">Reel</span><video muted loop playsinline><source src="assets/d2c/d2c-reel-1.mp4" type="video/mp4" /></video></div>
@@ -745,6 +755,7 @@
         <div class="media-card" data-category="food-beverage"><span class="badge">Reel</span><video muted loop playsinline><source src="assets/food-beverage/fb-reel-4.mp4" type="video/mp4" /></video></div>
         <div class="media-card" data-category="food-beverage"><span class="badge">Reel</span><video muted loop playsinline><source src="assets/food-beverage/fb-reel-1.mp4" type="video/mp4" /></video></div>
         <div class="media-card" data-category="food-beverage"><span class="badge">Reel</span><video muted loop playsinline><source src="assets/food-beverage/fb-reel-2.mp4" type="video/mp4" /></video></div>
+      </div>
       </div>
 
       <p class="gallery-label spaced">Statics That People Stop &amp; See</p>
@@ -1192,6 +1203,20 @@ var burger = document.getElementById('burgerBtn');
     ['touchstart','scroll','pointerdown'].forEach(function(evt){
       document.addEventListener(evt, kickHeroVideos, {once:true, passive:true});
     });
+  })();
+
+  // reel row prev/next arrow nav
+  (function(){
+    var row = document.getElementById('galleryReels');
+    var prev = document.getElementById('reelsPrev');
+    var next = document.getElementById('reelsNext');
+    if(!row || !prev || !next) return;
+    function step(){
+      var card = row.querySelector('.media-card');
+      return card ? card.getBoundingClientRect().width + 16 : row.clientWidth * 0.8;
+    }
+    prev.addEventListener('click', function(){ row.scrollBy({left: -step(), behavior:'smooth'}); });
+    next.addEventListener('click', function(){ row.scrollBy({left: step(), behavior:'smooth'}); });
   })();
 
   document.getElementById('year').textContent = 'Growvex Digital © ' + new Date().getFullYear();
