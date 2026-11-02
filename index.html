@@ -268,11 +268,11 @@
   }
 
   /* ---------- category filter ---------- */
-  .cat-scroll{display:flex; gap:.6rem; overflow-x:auto; scrollbar-width:none; -ms-overflow-style:none; margin-bottom:clamp(2.2rem,5vw,3rem); scroll-margin-top:6rem;}
+  .cat-scroll{display:flex; gap:0; overflow-x:auto; scrollbar-width:none; -ms-overflow-style:none; margin-bottom:clamp(2.2rem,5vw,3rem); scroll-margin-top:6rem; width:fit-content; max-width:100%; border:2px solid var(--accent); border-radius:999px; padding:.3rem;}
   .cat-scroll::-webkit-scrollbar{display:none;}
-  .cat-btn{flex:0 0 auto; font-family:"IBM Plex Mono"; font-size:.76rem; letter-spacing:.04em; padding:.55rem 1.1rem; border-radius:999px; border:1px solid color-mix(in srgb, var(--accent) 35%, transparent); background:var(--accent-dim); color:var(--accent); cursor:pointer; white-space:nowrap; transition:background .2s ease, border-color .2s ease, color .2s ease; text-decoration:none; display:inline-flex; align-items:center;}
-  .cat-btn:hover{border-color:var(--accent); color:var(--ink);}
-  .cat-btn.active{background:var(--accent); border-color:var(--accent); color:var(--accent-ink);}
+  .cat-btn{flex:0 0 auto; font-family:"Archivo"; font-weight:700; font-size:.85rem; letter-spacing:.02em; text-transform:uppercase; padding:.65rem 1.5rem; border-radius:999px; border:none; background:transparent; color:var(--ink-muted); cursor:pointer; white-space:nowrap; transition:background .2s ease, color .2s ease; text-decoration:none; display:inline-flex; align-items:center;}
+  .cat-btn:hover{color:var(--ink);}
+  .cat-btn.active{background:var(--accent); color:var(--accent-ink);}
 
   .gallery-label{font-family:"IBM Plex Mono"; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); margin:0 0 1rem;}
   .gallery-label.spaced{margin-top:2.8rem;}
