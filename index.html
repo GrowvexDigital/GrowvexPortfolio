@@ -431,12 +431,14 @@
   @media (max-width:560px){ .process{grid-template-columns:1fr;} }
 
   /* ---------- pricing ---------- */
+  #pricing .sec-head h2 b{color:var(--accent); font-weight:800;}
   .price-grid{display:grid; grid-template-columns:1fr 1fr; gap:1.3rem;}
-  .price-card{border-radius:24px; padding:clamp(1.6rem,4vw,2.3rem); border:1px solid var(--line-strong); background:var(--bg-raised-2);}
+  .price-card{border-radius:24px; padding:clamp(1.6rem,4vw,2.3rem); border:1.5px solid var(--accent); background:var(--bg-raised-2);}
   .price-card.highlight{background:var(--accent); color:var(--accent-ink); border-color:var(--accent);}
-  .price-card .eyebrow2{font-family:"IBM Plex Mono"; font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); margin:0 0 .9rem;}
-  .price-card.highlight .eyebrow2{color:color-mix(in srgb, var(--accent-ink) 75%, transparent);}
+  .price-card .eyebrow2{font-family:"IBM Plex Sans"; font-size:.92rem; color:var(--ink-muted); margin:0 0 .9rem;}
+  .price-card.highlight .eyebrow2{color:color-mix(in srgb, var(--accent-ink) 85%, transparent);}
   .price-card h3{font-family:"Archivo"; font-weight:800; font-size:clamp(1.6rem,3vw,2.1rem);}
+  .price-card:not(.highlight) h3{color:var(--accent);}
   .price-card p{margin:.8rem 0 0; font-size:.95rem; color:var(--ink-muted); max-width:36ch;}
   .price-card.highlight p{color:color-mix(in srgb, var(--accent-ink) 82%, transparent);}
   @media (max-width:700px){ .price-grid{grid-template-columns:1fr;} }
@@ -983,7 +985,7 @@
   <section id="pricing" class="numbered">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div><p class="eyebrow">How You Pay</p><h2>Two simple models.</h2></div>
+        <div><h2>How You <b>Pay?</b></h2></div>
       </div>
       <div class="price-grid reveal">
         <div class="price-card highlight">
