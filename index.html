@@ -446,16 +446,17 @@
   /* ---------- founder (auto-scroll marquee) ---------- */
   #founder{background:var(--black-bg); color:var(--black-ink);}
   #founder .eyebrow{color:var(--accent);}
+  #founder .eyebrow.pill{color:var(--accent-ink);}
   #founder h2{color:var(--black-ink);}
   #founder .lede{color:color-mix(in srgb, var(--black-ink) 68%, transparent);}
   .founder-head{display:grid; grid-template-columns:1fr 1fr; gap:clamp(2rem,5vw,4rem); align-items:end; margin-bottom:clamp(2.2rem,5vw,3rem);}
-  .founder-marquee{overflow:hidden; -webkit-mask-image:linear-gradient(90deg, transparent, black 4%, black 96%, transparent); mask-image:linear-gradient(90deg, transparent, black 4%, black 96%, transparent);}
-  .founder-grid{display:flex; gap:1rem; width:max-content; animation:founderScroll 26s linear infinite;}
-  @media (prefers-reduced-motion: reduce){ .founder-grid{animation:none;} }
-  @keyframes founderScroll{from{transform:translateX(0);} to{transform:translateX(-50%);}}
-  .founder-card{flex:0 0 auto; width:200px; border-radius:14px; background:var(--black-card); border:1px solid var(--black-line); padding:1.4rem; min-height:110px; display:flex; align-items:center; justify-content:center;}
+  .founder-head h2 b{color:var(--accent); font-weight:800;}
+  .founder-head .lede b{color:var(--accent); font-weight:700;}
+  .founder-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1rem;}
+  .founder-card{border-radius:14px; background:#fff; border:1px solid var(--black-line); padding:1.4rem; min-height:110px; display:flex; align-items:center; justify-content:center;}
   .founder-card img{max-width:100%; max-height:56px; width:auto; height:auto; object-fit:contain;}
   @media (max-width:900px){ .founder-head{grid-template-columns:1fr;} }
+  @media (max-width:560px){ .founder-grid{grid-template-columns:1fr 1fr;} }
   @media (max-width:560px){ .founder-card{width:170px;} }
 
   /* ---------- faq ---------- */
@@ -1006,26 +1007,18 @@
     <div class="wrap">
       <div class="founder-head reveal">
         <div>
-          <p class="eyebrow">The Founder</p>
-          <h2 style="margin-top:.8rem;">Brands the founder has personally driven results for.</h2>
+          <p class="eyebrow dot pill">The Founder</p>
+          <h2 style="margin-top:.8rem;">Brands <b>the Founder</b> Has Personally Driven Results For.</h2>
         </div>
-        <p class="lede">Before founding Growvex Digital, Prakhar Jain built and scaled these brands directly &mdash; across agency roles and independent projects.</p>
+        <p class="lede">Before founding Growvex Digital, <b>Prakhar Jain</b> built and scaled these brands directly &mdash; across agency roles and independent projects.</p>
       </div>
-      <div class="founder-marquee reveal">
-        <div class="founder-grid">
-          <div class="founder-card"><img src="assets/founder/founder-1.png" alt="" loading="lazy" /></div>
-          <div class="founder-card"><img src="assets/founder/founder-2.png" alt="" loading="lazy" /></div>
-          <div class="founder-card"><img src="assets/founder/founder-3.png" alt="" loading="lazy" /></div>
-          <div class="founder-card"><img src="assets/founder/founder-4.png" alt="" loading="lazy" /></div>
-          <div class="founder-card"><img src="assets/founder/founder-5.png" alt="" loading="lazy" /></div>
-          <div class="founder-card"><img src="assets/founder/founder-6.png" alt="" loading="lazy" /></div>
-          <div class="founder-card" aria-hidden="true"><img src="assets/founder/founder-1.png" alt="" loading="lazy" /></div>
-          <div class="founder-card" aria-hidden="true"><img src="assets/founder/founder-2.png" alt="" loading="lazy" /></div>
-          <div class="founder-card" aria-hidden="true"><img src="assets/founder/founder-3.png" alt="" loading="lazy" /></div>
-          <div class="founder-card" aria-hidden="true"><img src="assets/founder/founder-4.png" alt="" loading="lazy" /></div>
-          <div class="founder-card" aria-hidden="true"><img src="assets/founder/founder-5.png" alt="" loading="lazy" /></div>
-          <div class="founder-card" aria-hidden="true"><img src="assets/founder/founder-6.png" alt="" loading="lazy" /></div>
-        </div>
+      <div class="founder-grid reveal">
+        <div class="founder-card"><img src="assets/founder/founder-1.png" alt="" loading="lazy" /></div>
+        <div class="founder-card"><img src="assets/founder/founder-2.png" alt="" loading="lazy" /></div>
+        <div class="founder-card"><img src="assets/founder/founder-3.png" alt="" loading="lazy" /></div>
+        <div class="founder-card"><img src="assets/founder/founder-4.png" alt="" loading="lazy" /></div>
+        <div class="founder-card"><img src="assets/founder/founder-5.png" alt="" loading="lazy" /></div>
+        <div class="founder-card"><img src="assets/founder/founder-6.png" alt="" loading="lazy" /></div>
       </div>
     </div>
   </section>
@@ -1144,14 +1137,6 @@
   // that merely passes over the marquee also fires touchstart, which
   // previously left marquees stuck paused on mobile.
   (function(){
-    document.querySelectorAll('.founder-marquee').forEach(function(marquee){
-      var track = marquee.querySelector('.founder-grid');
-      if(!track) return;
-      function pause(){ track.style.animationPlayState = 'paused'; }
-      function resume(){ track.style.animationPlayState = ''; }
-      marquee.addEventListener('pointerenter', function(e){ if(e.pointerType === 'mouse'){ resume(); pause(); } });
-      marquee.addEventListener('pointerleave', function(e){ if(e.pointerType === 'mouse'){ resume(); } });
-    });
     document.querySelectorAll('#ticker').forEach(function(marquee){
       var track = marquee.querySelector('.ticker-track');
       function pause(){ track.style.animationPlayState = 'paused'; }
