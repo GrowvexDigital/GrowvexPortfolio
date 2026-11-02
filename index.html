@@ -460,26 +460,26 @@
   @media (max-width:560px){ .founder-card{width:170px;} }
 
   /* ---------- faq ---------- */
-  .faq-list{max-width:760px; margin:0 auto;}
-  .faq-item{border-bottom:1px solid var(--line-strong);}
-  .faq-q{width:100%; display:flex; align-items:center; justify-content:space-between; gap:1.5rem; padding:1.4rem 0; background:none; border:none; text-align:left; cursor:pointer; font-family:"Archivo"; font-weight:700; font-size:1.05rem; color:var(--ink);}
-  .faq-icon{width:30px; height:30px; min-width:30px; border-radius:50%; border:1px solid var(--line-strong); display:flex; align-items:center; justify-content:center; color:var(--ink-muted); position:relative;}
-  .faq-icon::before, .faq-icon::after{content:""; position:absolute; background:currentColor; transition:transform .25s ease;}
-  .faq-icon::before{width:11px; height:1.5px;}
-  .faq-icon::after{width:1.5px; height:11px;}
-  .faq-item.open .faq-icon::after{transform:scaleY(0);}
-  .faq-item.open .faq-icon{border-color:var(--accent); color:var(--accent);}
-  .faq-a{max-height:0; overflow:hidden; transition:max-height .35s ease;}
-  .faq-a p{margin:0 0 1.3rem; color:var(--ink-muted); font-size:.95rem; max-width:62ch; line-height:1.65;}
-  .faq-item.open .faq-a{max-height:260px;}
+  #faq .wrap{display:grid; grid-template-columns:0.75fr 1.6fr; gap:clamp(2rem,5vw,4rem); align-items:start;}
+  #faq .sec-head{margin-bottom:0;}
+  .faq-list{max-width:none; margin:0;}
+  .faq-item{border-bottom:1px solid var(--line-strong); padding-bottom:1.6rem; margin-bottom:1.6rem;}
+  .faq-item:last-child{border-bottom:none; margin-bottom:0;}
+  .faq-q{width:100%; display:flex; align-items:center; justify-content:space-between; gap:1.5rem; padding:0; background:none; border:none; text-align:left; cursor:default; font-family:"Archivo"; font-weight:700; font-size:1.2rem; color:var(--ink);}
+  .faq-icon{width:30px; height:30px; min-width:30px; border-radius:50%; background:var(--accent); display:flex; align-items:center; justify-content:center; color:var(--accent-ink); position:relative;}
+  .faq-icon::before{content:""; position:absolute; width:12px; height:1.5px; background:currentColor;}
+  .faq-a{max-height:none; overflow:visible; margin-top:.8rem;}
+  .faq-a p{margin:0; color:var(--ink-muted); font-size:.95rem; max-width:62ch; line-height:1.65;}
+  @media (max-width:860px){ #faq .wrap{grid-template-columns:1fr;} }
 
   /* ---------- final cta ---------- */
   #contact.numbered{padding:clamp(3.5rem,8vw,6rem) 0; background:var(--accent); color:var(--accent-ink); text-align:center;}
-  #contact .eyebrow{color:var(--accent-ink); opacity:.75; justify-content:center;}
+  #contact .eyebrow{color:var(--accent-ink); justify-content:center;}
   #cta h2{font-size:clamp(2.2rem,5.4vw,3.6rem); letter-spacing:-0.02em; margin:1rem auto 0; max-width:14ch;}
-  #cta p.lede{color:color-mix(in srgb, var(--accent-ink) 78%, transparent); max-width:46ch; margin:1rem auto 0; font-size:1.02rem;}
+  #cta p.lede{color:var(--accent-ink); max-width:46ch; margin:1rem auto 0; font-size:1.02rem;}
   .cta-row{display:flex; flex-wrap:wrap; justify-content:center; gap:1rem; margin-top:2rem;}
-  #cta .btn{--btn-shadow:var(--accent-ink);}
+  #cta .btn{--btn-shadow:transparent; border:none; box-shadow:none;}
+  #cta .btn:hover, #cta .btn:active{transform:none; box-shadow:none;}
   #cta .btn-primary{background:var(--accent-ink); color:var(--accent);}
 
   footer{padding:2.2rem 0 3rem;}
@@ -1025,9 +1025,8 @@
 
   <section id="faq" class="numbered">
     <div class="wrap">
-      <div class="sec-head reveal" style="justify-content:center; text-align:center; flex-direction:column; align-items:center;">
-        <p class="eyebrow">FAQ</p>
-        <h2 style="margin-top:.8rem;">Before you message us.</h2>
+      <div class="sec-head reveal">
+        <h2>Before You<br />Message Us.</h2>
       </div>
       <div class="faq-list reveal">
         <div class="faq-item">
@@ -1250,20 +1249,7 @@ var burger = document.getElementById('burgerBtn');
     setActive(catButtons[0]);
   })();
 
-  // faq accordion: single-open
-  (function(){
-    var items = document.querySelectorAll('.faq-item');
-    items.forEach(function(item){
-      var btn = item.querySelector('.faq-q');
-      btn.addEventListener('click', function(){
-        var isOpen = item.classList.contains('open');
-        items.forEach(function(i){ i.classList.remove('open'); i.querySelector('.faq-q').setAttribute('aria-expanded','false'); });
-        if(!isOpen){ item.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
-      });
-    });
-  })();
-
-  // lightbox: click-to-enlarge for static creatives, instagram grids & result screenshots
+// lightbox: click-to-enlarge for static creatives, instagram grids & result screenshots
   (function(){
     var lightbox = document.getElementById('lightbox');
     var lightboxImg = document.getElementById('lightboxImg');
