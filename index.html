@@ -288,18 +288,19 @@
   @media (max-width:560px){ .logo-cell{flex-basis:150px;} .logo-cell img{max-height:76px;} }
 
   /* ---------- statics wavy auto-scroll carousel (filtered by category) ---------- */
-  .statics-carousel{overflow:hidden; margin-top:2.8rem; padding:2.6rem 0; -webkit-mask-image:linear-gradient(90deg, transparent, black 5%, black 95%, transparent); mask-image:linear-gradient(90deg, transparent, black 5%, black 95%, transparent);}
-  .statics-track{display:flex; align-items:center; gap:1.4rem; width:max-content; animation:staticsScroll 30s linear infinite;}
+  .statics-heading{font-family:"Archivo"; font-weight:800; font-size:clamp(1.7rem,3.4vw,2.5rem); letter-spacing:-0.01em; text-transform:none; text-align:center; color:var(--ink-muted); margin:2.4rem 0 0;}
+  .statics-carousel{overflow:hidden; margin-top:clamp(2.8rem,6vw,4rem); padding:3.4rem 0; -webkit-mask-image:linear-gradient(90deg, transparent, black 5%, black 95%, transparent); mask-image:linear-gradient(90deg, transparent, black 5%, black 95%, transparent);}
+  .statics-track{display:flex; align-items:center; gap:2.6rem; width:max-content; animation:staticsScroll 34s linear infinite;}
   @media (prefers-reduced-motion: reduce){ .statics-track{animation:none;} }
   @keyframes staticsScroll{from{transform:translateX(0);} to{transform:translateX(-50%);}}
-  .polaroid-card{flex:0 0 auto; width:clamp(120px,15vw,180px); aspect-ratio:1/1.08; background:#fff; padding:7px 7px 9px; border-radius:14px; box-shadow:0 16px 34px -14px rgba(0,0,0,.3);}
-  .polaroid-card img{width:100%; height:100%; object-fit:cover; border-radius:8px; display:block;}
-  .polaroid-card:nth-child(6n+1){transform:translateY(-16px) rotate(-7deg);}
-  .polaroid-card:nth-child(6n+2){transform:translateY(10px) rotate(5deg);}
-  .polaroid-card:nth-child(6n+3){transform:translateY(-6px) rotate(-10deg);}
-  .polaroid-card:nth-child(6n+4){transform:translateY(14px) rotate(8deg);}
-  .polaroid-card:nth-child(6n+5){transform:translateY(-12px) rotate(-4deg);}
-  .polaroid-card:nth-child(6n+6){transform:translateY(6px) rotate(11deg);}
+  .polaroid-card{flex:0 0 auto; width:clamp(200px,22vw,300px); aspect-ratio:1/1; border-radius:22px; overflow:hidden; box-shadow:0 26px 50px -18px rgba(0,0,0,.4);}
+  .polaroid-card img{width:100%; height:100%; object-fit:cover; display:block;}
+  .polaroid-card:nth-child(6n+1){transform:translateY(-22px) rotate(-9deg);}
+  .polaroid-card:nth-child(6n+2){transform:translateY(16px) rotate(7deg);}
+  .polaroid-card:nth-child(6n+3){transform:translateY(-10px) rotate(-13deg);}
+  .polaroid-card:nth-child(6n+4){transform:translateY(20px) rotate(10deg);}
+  .polaroid-card:nth-child(6n+5){transform:translateY(-16px) rotate(-6deg);}
+  .polaroid-card:nth-child(6n+6){transform:translateY(10px) rotate(14deg);}
 
   .scroll-row{display:flex; gap:1rem; overflow-x:auto; scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch; padding-bottom:.6rem;}
   .scroll-row::-webkit-scrollbar{height:6px;}
@@ -758,7 +759,6 @@
       </div>
       </div>
 
-      <p class="gallery-label spaced">Statics That People Stop &amp; See</p>
       <div class="statics-carousel reveal" id="staticsCarousel">
         <div class="statics-track" data-cat="d2c">
           <div class="polaroid-card"><img src="assets/d2c/d2c-static-1.jpeg" alt="" loading="lazy" /></div>
@@ -811,6 +811,7 @@
           <div class="polaroid-card" aria-hidden="true"><img src="assets/food-beverage/fb-static-6.jpeg" alt="" loading="lazy" /></div>
         </div>
       </div>
+      <p class="statics-heading">Statics That People Stop &amp; See</p>
 
       <p class="gallery-label spaced">Satisfying Instagram Grids</p>
       <div class="scroll-row grids reveal" id="galleryGrids">
