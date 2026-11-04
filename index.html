@@ -271,7 +271,8 @@
   }
 
   /* ---------- category filter ---------- */
-  .cat-scroll{display:flex; gap:0; overflow-x:auto; scrollbar-width:none; -ms-overflow-style:none; margin-bottom:clamp(2.2rem,5vw,3rem); scroll-margin-top:6rem; width:fit-content; max-width:100%; border:2px solid var(--accent); border-radius:999px; padding:.3rem;}
+  .cat-nav-wrap{position:relative; display:flex; align-items:center; gap:.6rem; margin-bottom:clamp(2.2rem,5vw,3rem);}
+  .cat-scroll{display:flex; gap:0; overflow-x:auto; scrollbar-width:none; -ms-overflow-style:none; scroll-margin-top:6rem; width:fit-content; max-width:100%; border:2px solid var(--accent); border-radius:999px; padding:.3rem; margin-bottom:0;}
   .cat-scroll::-webkit-scrollbar{display:none;}
   .cat-btn{flex:0 0 auto; font-family:"Archivo"; font-weight:700; font-size:.85rem; letter-spacing:.02em; text-transform:uppercase; padding:.65rem 1.5rem; border-radius:999px; border:none; background:transparent; color:var(--ink-muted); cursor:pointer; white-space:nowrap; transition:background .2s ease, color .2s ease; text-decoration:none; display:inline-flex; align-items:center;}
   .cat-btn:hover{color:var(--ink);}
@@ -345,6 +346,10 @@
   .reel-nav.prev{left:-6px;}
   .reel-nav.next{right:-6px;}
   @media (max-width:760px){ .reel-nav{display:none;} }
+  .cat-nav{flex:0 0 auto; width:34px; height:34px; border-radius:50%; background:var(--accent); color:var(--accent-ink); border:none; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 10px 20px -10px rgba(0,0,0,.35); transition:transform .2s ease;}
+  .cat-nav:hover{transform:scale(1.07);}
+  .cat-nav svg{width:16px; height:16px;}
+  .cat-nav:disabled{opacity:.35; cursor:default; pointer-events:none;}
 
   /* ---------- lightbox ---------- */
   .lightbox{position:fixed; inset:0; z-index:100; background:rgba(10,8,5,.92); display:none; align-items:center; justify-content:center; padding:clamp(1.2rem,5vw,3.5rem); cursor:zoom-out;}
@@ -723,13 +728,17 @@
         </div>
       </div>
 
-      <div class="cat-scroll reveal" id="catPills">
-        <a class="cat-btn active" data-cat="d2c" href="#cat-d2c">Clothing</a>
-        <a class="cat-btn" data-cat="d2c" href="#cat-d2c">Jewellery</a>
-        <a class="cat-btn" data-cat="academic" href="#cat-academic">Academic</a>
-        <a class="cat-btn" data-cat="food-beverage" href="#cat-food-beverage">Caf&eacute;s</a>
-        <a class="cat-btn" data-cat="food-beverage" href="#cat-food-beverage">Salons</a>
-        <a class="cat-btn" data-cat="interiors" href="#cat-interiors">Interiors</a>
+      <div class="cat-nav-wrap">
+        <button type="button" class="cat-nav prev" id="catPillsPrev" aria-label="Scroll categories left"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+        <div class="cat-scroll reveal" id="catPills">
+          <a class="cat-btn active" data-cat="d2c" href="#cat-d2c">Clothing</a>
+          <a class="cat-btn" data-cat="d2c" href="#cat-d2c">Jewellery</a>
+          <a class="cat-btn" data-cat="academic" href="#cat-academic">Academic</a>
+          <a class="cat-btn" data-cat="food-beverage" href="#cat-food-beverage">Caf&eacute;s</a>
+          <a class="cat-btn" data-cat="food-beverage" href="#cat-food-beverage">Salons</a>
+          <a class="cat-btn" data-cat="interiors" href="#cat-interiors">Interiors</a>
+        </div>
+        <button type="button" class="cat-nav next" id="catPillsNext" aria-label="Scroll categories right"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
       </div>
 
       <p class="gallery-label">Brand Logos</p>
@@ -1281,6 +1290,25 @@ var burger = document.getElementById('burgerBtn');
     }
     prev.addEventListener('click', function(){ row.scrollBy({left: -step(), behavior:'smooth'}); });
     next.addEventListener('click', function(){ row.scrollBy({left: step(), behavior:'smooth'}); });
+  })();
+
+  // category pills prev/next arrow nav
+  (function(){
+    var row = document.getElementById('catPills');
+    var prev = document.getElementById('catPillsPrev');
+    var next = document.getElementById('catPillsNext');
+    if(!row || !prev || !next) return;
+    function step(){ return row.clientWidth * 0.7; }
+    function updateDisabled(){
+      var max = row.scrollWidth - row.clientWidth;
+      prev.disabled = row.scrollLeft <= 2;
+      next.disabled = row.scrollLeft >= max - 2;
+    }
+    prev.addEventListener('click', function(){ row.scrollBy({left: -step(), behavior:'smooth'}); });
+    next.addEventListener('click', function(){ row.scrollBy({left: step(), behavior:'smooth'}); });
+    row.addEventListener('scroll', updateDisabled);
+    window.addEventListener('resize', updateDisabled);
+    updateDisabled();
   })();
 
   document.getElementById('year').textContent = 'Growvex Digital © ' + new Date().getFullYear();
