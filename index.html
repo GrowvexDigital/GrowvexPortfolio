@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
 <meta charset="utf-8" />
 <title>GrowVex Digital — Performance Marketing &amp; Creative Agency</title>
@@ -27,12 +27,14 @@
     --black-bg:#18110a; --black-ink:#f5ece0; --black-card:#231a10; --black-line:rgba(245,236,224,.14);
     --maxw:1180px; color-scheme:light;
   }
-  :root[data-theme="dark"]{
-    --bg:#15100b; --bg-raised:#1e1712; --bg-raised-2:#291f17;
-    --ink:#f4ece1; --ink-muted:#bfae9c; --ink-faint:#8a7b68;
-    --accent:#ff8a4d; --accent-ink:#1b1108; --accent-dim:#3a2415;
-    --line:rgba(244,236,225,0.10); --line-strong:rgba(244,236,225,0.18);
-    color-scheme:dark;
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#15100b; --bg-raised:#1e1712; --bg-raised-2:#291f17;
+      --ink:#f4ece1; --ink-muted:#bfae9c; --ink-faint:#8a7b68;
+      --accent:#ff8a4d; --accent-ink:#1b1108; --accent-dim:#3a2415;
+      --line:rgba(244,236,225,0.10); --line-strong:rgba(244,236,225,0.18);
+      color-scheme:dark;
+    }
   }
   body, #nav, footer, #mobileMenu, .media-card, .founder-card, .result-shot,
   .step, .stat-card, .faq-item, .price-card{
