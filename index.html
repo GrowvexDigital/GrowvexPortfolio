@@ -1092,10 +1092,24 @@
   // "must be visible to autoplay" heuristic, so re-kick playback the moment
   // the overlay actually clears, not just on load/canplay.
   function kickHeroVideos(){
-    document.querySelectorAll('.hero-phone video, .hero-reel-video').forEach(function(v){
-      var p = v.play();
-      if(p && typeof p.catch === 'function'){ p.catch(function(){}); }
+    // calling .play() on 7 videos in the same tick makes some browsers
+    // silently drop a few under media-pipeline contention; staggering by
+    // a beat each, plus one delayed retry pass for stragglers, fixes that.
+    var vids = document.querySelectorAll('.hero-phone video, .hero-reel-video');
+    vids.forEach(function(v, i){
+      setTimeout(function(){
+        var p = v.play();
+        if(p && typeof p.catch === 'function'){ p.catch(function(){}); }
+      }, i * 90);
     });
+    setTimeout(function(){
+      vids.forEach(function(v){
+        if(v.paused){
+          var p = v.play();
+          if(p && typeof p.catch === 'function'){ p.catch(function(){}); }
+        }
+      });
+    }, vids.length * 90 + 700);
   }
 
   (function(){
