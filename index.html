@@ -820,22 +820,22 @@
 
       <div class="statics-carousel" id="staticsCarousel">
         <div class="statics-track" data-cat="d2c">
-          <div class="polaroid-card"><img src="assets/d2c/d2c-static-1.jpeg" alt="" loading="lazy" /></div>
-          <div class="polaroid-card"><img src="assets/d2c/d2c-static-2.jpeg" alt="" loading="lazy" /></div>
-          <div class="polaroid-card"><img src="assets/d2c/d2c-static-3.jpeg" alt="" loading="lazy" /></div>
-          <div class="polaroid-card"><img src="assets/d2c/d2c-static-4.jpeg" alt="" loading="lazy" /></div>
-          <div class="polaroid-card"><img src="assets/d2c/d2c-static-5.jpeg" alt="" loading="lazy" /></div>
-          <div class="polaroid-card"><img src="assets/d2c/d2c-static-6.jpeg" alt="" loading="lazy" /></div>
-          <div class="polaroid-card"><img src="assets/d2c/d2c-static-7.jpeg" alt="" loading="lazy" /></div>
-          <div class="polaroid-card"><img src="assets/d2c/d2c-static-8.jpeg" alt="" loading="lazy" /></div>
-          <div class="polaroid-card" aria-hidden="true"><img src="assets/d2c/d2c-static-1.jpeg" alt="" loading="lazy" /></div>
-          <div class="polaroid-card" aria-hidden="true"><img src="assets/d2c/d2c-static-2.jpeg" alt="" loading="lazy" /></div>
-          <div class="polaroid-card" aria-hidden="true"><img src="assets/d2c/d2c-static-3.jpeg" alt="" loading="lazy" /></div>
-          <div class="polaroid-card" aria-hidden="true"><img src="assets/d2c/d2c-static-4.jpeg" alt="" loading="lazy" /></div>
-          <div class="polaroid-card" aria-hidden="true"><img src="assets/d2c/d2c-static-5.jpeg" alt="" loading="lazy" /></div>
-          <div class="polaroid-card" aria-hidden="true"><img src="assets/d2c/d2c-static-6.jpeg" alt="" loading="lazy" /></div>
-          <div class="polaroid-card" aria-hidden="true"><img src="assets/d2c/d2c-static-7.jpeg" alt="" loading="lazy" /></div>
-          <div class="polaroid-card" aria-hidden="true"><img src="assets/d2c/d2c-static-8.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card" data-sub="clothing"><img src="assets/d2c/d2c-static-1.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card" data-sub="clothing"><img src="assets/d2c/d2c-static-2.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card" data-sub="clothing"><img src="assets/d2c/d2c-static-3.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card" data-sub="clothing"><img src="assets/d2c/d2c-static-4.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card" data-sub="clothing"><img src="assets/d2c/d2c-static-5.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card" data-sub="clothing"><img src="assets/d2c/d2c-static-6.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card" data-sub="clothing"><img src="assets/d2c/d2c-static-7.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card" data-sub="clothing"><img src="assets/d2c/d2c-static-8.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card" data-sub="clothing" aria-hidden="true"><img src="assets/d2c/d2c-static-1.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card" data-sub="clothing" aria-hidden="true"><img src="assets/d2c/d2c-static-2.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card" data-sub="clothing" aria-hidden="true"><img src="assets/d2c/d2c-static-3.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card" data-sub="clothing" aria-hidden="true"><img src="assets/d2c/d2c-static-4.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card" data-sub="clothing" aria-hidden="true"><img src="assets/d2c/d2c-static-5.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card" data-sub="clothing" aria-hidden="true"><img src="assets/d2c/d2c-static-6.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card" data-sub="clothing" aria-hidden="true"><img src="assets/d2c/d2c-static-7.jpeg" alt="" loading="lazy" /></div>
+          <div class="polaroid-card" data-sub="clothing" aria-hidden="true"><img src="assets/d2c/d2c-static-8.jpeg" alt="" loading="lazy" /></div>
         </div>
         <div class="statics-track" data-cat="academic" style="display:none;">
           <div class="polaroid-card"><img src="assets/academic/academic-static-1.jpeg" alt="" loading="lazy" /></div>
@@ -1327,7 +1327,12 @@ var burger = document.getElementById('burgerBtn');
       var sub = activeBtn.textContent.trim().toLowerCase();
       catButtons.forEach(function(b){ b.classList.toggle('active', b === activeBtn); });
       cards.forEach(function(c){ c.style.display = (c.dataset.category === cat) ? '' : 'none'; });
-      staticsTracks.forEach(function(t){ t.style.display = (t.dataset.cat === cat) ? 'flex' : 'none'; });
+      staticsTracks.forEach(function(t){
+        t.style.display = (t.dataset.cat === cat) ? 'flex' : 'none';
+        t.querySelectorAll('.polaroid-card').forEach(function(card){
+          card.style.display = (!card.dataset.sub || card.dataset.sub === sub) ? '' : 'none';
+        });
+      });
       logoTracks.forEach(function(t){
         t.style.display = (t.dataset.cat === cat) ? 'flex' : 'none';
         t.querySelectorAll('.logo-cell').forEach(function(cell){
