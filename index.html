@@ -903,17 +903,25 @@
 
       <p class="gallery-label spaced">Satisfying Instagram Grids</p>
       <div class="scroll-row grids reveal" id="galleryGrids">
-        <div class="insta-item">
-          <div class="media-card" data-category="d2c"><img src="assets/d2c/d2c-instagram-grid-1.jpg" alt="Instagram profile grid &mdash; Poiesis" loading="lazy" /></div>
+        <div class="insta-item" data-category="d2c" data-sub="clothing">
+          <div class="media-card"><img src="assets/d2c/d2c-instagram-grid-1.jpg" alt="Instagram profile grid &mdash; Poiesis" loading="lazy" /></div>
           <p class="insta-caption"><b>Poiesis</b>Instagram, managed by Growvex</p>
         </div>
-        <div class="insta-item">
-          <div class="media-card" data-category="d2c"><img src="assets/d2c/d2c-instagram-grid-3.jpg" alt="Instagram profile grid &mdash; Winsome" loading="lazy" /></div>
+        <div class="insta-item" data-category="d2c" data-sub="clothing">
+          <div class="media-card"><img src="assets/d2c/d2c-instagram-grid-3.jpg" alt="Instagram profile grid &mdash; Winsome" loading="lazy" /></div>
           <p class="insta-caption"><b>Winsome</b>Instagram, managed by Growvex</p>
         </div>
-        <div class="insta-item">
-          <div class="media-card" data-category="d2c"><img src="assets/d2c/d2c-instagram-grid-2.jpg" alt="Instagram profile grid &mdash; Rootin" loading="lazy" /></div>
+        <div class="insta-item" data-category="d2c" data-sub="clothing">
+          <div class="media-card"><img src="assets/d2c/d2c-instagram-grid-2.jpg" alt="Instagram profile grid &mdash; Rootin" loading="lazy" /></div>
           <p class="insta-caption"><b>Rootin</b>Instagram, managed by Growvex</p>
+        </div>
+        <div class="insta-item" data-category="d2c" data-sub="jewellery">
+          <div class="media-card"><img src="assets/d2c/d2c-instagram-grid-4.jpg" alt="Instagram profile grid &mdash; Guerlyn" loading="lazy" /></div>
+          <p class="insta-caption"><b>Guerlyn</b>Instagram, managed by Growvex</p>
+        </div>
+        <div class="insta-item" data-category="d2c" data-sub="jewellery">
+          <div class="media-card"><img src="assets/d2c/d2c-instagram-grid-5.jpg" alt="Instagram profile grid &mdash; iWikTrends" loading="lazy" /></div>
+          <p class="insta-caption"><b>iWikTrends</b>Instagram, managed by Growvex</p>
         </div>
       </div>
     </div>
@@ -1351,7 +1359,7 @@ var burger = document.getElementById('burgerBtn');
   (function(){
     var catButtons = document.querySelectorAll('.cat-btn');
     if(!catButtons.length) return;
-    var cards = document.querySelectorAll('#galleryReels .media-card, #galleryGrids .media-card');
+    var cards = document.querySelectorAll('#galleryReels .media-card, #galleryGrids .insta-item');
     var staticsTracks = document.querySelectorAll('.statics-track');
     var logoTracks = document.querySelectorAll('.logo-track');
     function setActive(activeBtn){
