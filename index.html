@@ -775,28 +775,28 @@
           <div class="logo-cell" data-sub="clothing" aria-hidden="true"><img src="assets/brands/jkh.jpg" alt="" /></div>
         </div>
         <div class="logo-track" data-cat="academic" style="display:none;">
-          <div class="logo-cell"><img src="assets/brands/researchcraft.png" alt="ResearchCraft" /></div>
-          <div class="logo-cell"><img src="assets/brands/thesiszen.png" alt="ThesisZen" /></div>
-          <div class="logo-cell"><img src="assets/brands/estock-school-logo.jpg" alt="Estock School" /></div>
-          <div class="logo-cell"><img src="assets/brands/med-zen-logo.jpg" alt="MedZen Writes" /></div>
-          <div class="logo-cell"><img src="assets/brands/drcbs-wellness.jpg" alt="drcbs Inchloss Wellness Clinic" /></div>
-          <div class="logo-cell" aria-hidden="true"><img src="assets/brands/researchcraft.png" alt="" /></div>
-          <div class="logo-cell" aria-hidden="true"><img src="assets/brands/thesiszen.png" alt="" /></div>
-          <div class="logo-cell" aria-hidden="true"><img src="assets/brands/estock-school-logo.jpg" alt="" /></div>
-          <div class="logo-cell" aria-hidden="true"><img src="assets/brands/med-zen-logo.jpg" alt="" /></div>
-          <div class="logo-cell" aria-hidden="true"><img src="assets/brands/drcbs-wellness.jpg" alt="" /></div>
+          <div class="logo-cell"><img data-src="assets/brands/researchcraft.png" alt="ResearchCraft" /></div>
+          <div class="logo-cell"><img data-src="assets/brands/thesiszen.png" alt="ThesisZen" /></div>
+          <div class="logo-cell"><img data-src="assets/brands/estock-school-logo.jpg" alt="Estock School" /></div>
+          <div class="logo-cell"><img data-src="assets/brands/med-zen-logo.jpg" alt="MedZen Writes" /></div>
+          <div class="logo-cell"><img data-src="assets/brands/drcbs-wellness.jpg" alt="drcbs Inchloss Wellness Clinic" /></div>
+          <div class="logo-cell" aria-hidden="true"><img data-src="assets/brands/researchcraft.png" alt="" /></div>
+          <div class="logo-cell" aria-hidden="true"><img data-src="assets/brands/thesiszen.png" alt="" /></div>
+          <div class="logo-cell" aria-hidden="true"><img data-src="assets/brands/estock-school-logo.jpg" alt="" /></div>
+          <div class="logo-cell" aria-hidden="true"><img data-src="assets/brands/med-zen-logo.jpg" alt="" /></div>
+          <div class="logo-cell" aria-hidden="true"><img data-src="assets/brands/drcbs-wellness.jpg" alt="" /></div>
         </div>
         <div class="logo-track" data-cat="food-beverage" style="display:none;">
-          <div class="logo-cell" data-sub="cafés"><img src="assets/brands/kake-di-hatti.png" alt="Kake Di Hatti" /></div>
-          <div class="logo-cell" data-sub="cafés"><img src="assets/brands/mitraa.png" alt="Mitraa Café Couture" /></div>
-          <div class="logo-cell" data-sub="salons"><img src="assets/brands/trendblend.jpg" alt="TrendBlend Unisex Salon" /></div>
-          <div class="logo-cell" data-sub="cafés" aria-hidden="true"><img src="assets/brands/kake-di-hatti.png" alt="" /></div>
-          <div class="logo-cell" data-sub="cafés" aria-hidden="true"><img src="assets/brands/mitraa.png" alt="" /></div>
-          <div class="logo-cell" data-sub="salons" aria-hidden="true"><img src="assets/brands/trendblend.jpg" alt="" /></div>
+          <div class="logo-cell" data-sub="cafés"><img data-src="assets/brands/kake-di-hatti.png" alt="Kake Di Hatti" /></div>
+          <div class="logo-cell" data-sub="cafés"><img data-src="assets/brands/mitraa.png" alt="Mitraa Café Couture" /></div>
+          <div class="logo-cell" data-sub="salons"><img data-src="assets/brands/trendblend.jpg" alt="TrendBlend Unisex Salon" /></div>
+          <div class="logo-cell" data-sub="cafés" aria-hidden="true"><img data-src="assets/brands/kake-di-hatti.png" alt="" /></div>
+          <div class="logo-cell" data-sub="cafés" aria-hidden="true"><img data-src="assets/brands/mitraa.png" alt="" /></div>
+          <div class="logo-cell" data-sub="salons" aria-hidden="true"><img data-src="assets/brands/trendblend.jpg" alt="" /></div>
         </div>
         <div class="logo-track" data-cat="interiors" style="display:none;">
-          <div class="logo-cell"><img src="assets/brands/kitchen-gallery.jpg" alt="Kitchen Gallery" /></div>
-          <div class="logo-cell" aria-hidden="true"><img src="assets/brands/kitchen-gallery.jpg" alt="" /></div>
+          <div class="logo-cell"><img data-src="assets/brands/kitchen-gallery.jpg" alt="Kitchen Gallery" /></div>
+          <div class="logo-cell" aria-hidden="true"><img data-src="assets/brands/kitchen-gallery.jpg" alt="" /></div>
         </div>
       </div>
 
@@ -1439,9 +1439,18 @@ var burger = document.getElementById('burgerBtn');
         });
       });
       logoTracks.forEach(function(t){
-        t.style.display = (t.dataset.cat === cat) ? 'flex' : 'none';
+        var trackMatch = (t.dataset.cat === cat);
+        t.style.display = trackMatch ? 'flex' : 'none';
         t.querySelectorAll('.logo-cell').forEach(function(cell){
-          cell.style.display = (!cell.dataset.sub || cell.dataset.sub === sub) ? '' : 'none';
+          var cellMatch = (!cell.dataset.sub || cell.dataset.sub === sub);
+          cell.style.display = cellMatch ? '' : 'none';
+          if(trackMatch && cellMatch){
+            var img = cell.querySelector('img[data-src]');
+            if(img){
+              img.src = img.dataset.src;
+              img.removeAttribute('data-src');
+            }
+          }
         });
       });
     }
